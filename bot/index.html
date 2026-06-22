@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rumbo · Bot de licencia (demo)</title>
+<style>
+  :root{--wa-teal:#075e54;--wa-green:#25d366;--wa-light:#dcf8c6;--wa-bg:#e5ddd5;--bubble-in:#fff;--ink:#111b21;--muted:#667781}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#0b141a}
+  .phone{max-width:430px;margin:0 auto;height:100vh;display:flex;flex-direction:column;background:var(--wa-bg);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath fill='%23d8cfc4' fill-opacity='0.25' d='M0 0h2v2H0zM10 10h2v2h-2z'/%3E%3C/svg%3E");box-shadow:0 0 40px rgba(0,0,0,.5)}
+  header{background:var(--wa-teal);color:#fff;padding:10px 12px;display:flex;align-items:center;gap:10px;flex:0 0 auto}
+  header .av{width:40px;height:40px;border-radius:50%;background:#0b8a78;display:flex;align-items:center;justify-content:center;font-size:20px}
+  header .meta{line-height:1.2}
+  header .meta b{font-size:16px}
+  header .meta span{font-size:12px;opacity:.85}
+  .demo-tag{margin-left:auto;background:rgba(255,255,255,.18);font-size:11px;padding:3px 8px;border-radius:10px}
+  #chat{flex:1 1 auto;overflow-y:auto;padding:14px 10px 4px;display:flex;flex-direction:column;gap:6px}
+  .row{display:flex}.row.in{justify-content:flex-start}.row.out{justify-content:flex-end}
+  .sys{align-self:center;background:#cfe9f1;color:#3a6b78;font-size:11px;padding:3px 10px;border-radius:8px;margin:6px 0}
+  .bubble{max-width:82%;padding:7px 10px 8px;border-radius:9px;font-size:14.5px;line-height:1.35;color:var(--ink);box-shadow:0 1px .5px rgba(0,0,0,.13);white-space:pre-wrap;word-wrap:break-word;position:relative}
+  .in .bubble{background:var(--bubble-in);border-top-left-radius:0}
+  .out .bubble{background:var(--wa-light);border-top-right-radius:0}
+  .bubble .t{display:block;text-align:right;font-size:10px;color:var(--muted);margin-top:2px}
+  .bubble.doc{background:#f0f6fb;border:1px solid #d7e6f0}
+  .docline{display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:3px}
+  .docline .ico{font-size:22px}
+  .field{font-size:13.5px;margin:2px 0}.field b{color:#075e54}
+  .ok{color:#1a8a3a;font-weight:600}.warn{color:#c0392b;font-weight:600}
+  .typing .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#9aa6ab;margin:0 1px;animation:b 1.2s infinite}
+  .typing .dot:nth-child(2){animation-delay:.2s}.typing .dot:nth-child(3){animation-delay:.4s}
+  @keyframes b{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+  #composer{flex:0 0 auto;padding:8px 10px 14px;background:transparent}
+  .quick{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+  .quick button{background:#fff;color:#075e54;border:1px solid #c9d3d6;border-radius:18px;padding:8px 14px;font-size:14px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+  .quick button:hover{background:#f1faf5}
+  .quick button.primary{background:var(--wa-green);color:#fff;border-color:var(--wa-green)}
+  .inputrow{display:flex;gap:8px;align-items:center}
+  .inputrow input{flex:1;border:none;border-radius:20px;padding:11px 14px;font-size:14px;outline:none}
+  .inputrow .send{width:44px;height:44px;border-radius:50%;border:none;background:var(--wa-green);color:#fff;font-size:18px;cursor:pointer}
+  .note{max-width:430px;margin:6px auto 0;color:#8a97a0;font-size:11px;text-align:center;padding:0 12px}
+  .restart{display:block;margin:0 auto;background:none;border:none;color:#8a97a0;font-size:12px;text-decoration:underline;cursor:pointer;padding:6px}
+</style>
+</head>
+<body>
+<div class="phone">
+  <header>
+    <div class="av">⛵</div>
+    <div class="meta"><b>Escola Nàutica Palamós</b><span id="sub">asistente IA · en línea</span></div>
+    <div class="demo-tag">DEMO</div>
+  </header>
+  <div id="chat"></div>
+  <div id="composer"></div>
+</div>
+<div class="note">Demo de Rumbo · simula el bot de WhatsApp que recoge los datos de la licencia. La lectura de foto y el envío son simulados.
+  <button class="restart" onclick="location.reload()">↻ reiniciar</button></div>
+
+<script>
+const chat=document.getElementById('chat'), composer=document.getElementById('composer');
+const now=()=>{const d=new Date();return ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2)};
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+let LANG='es';
+const S={
+  sub:{es:'asistente IA · en línea',ca:'assistent IA · en línia',en:'AI assistant · online',fr:'assistant IA · en ligne'},
+  greeting:{
+    es:"¡Hola! 👋 Soy un <b>asistente de IA</b> de <b>Escola Nàutica Palamós</b> (no soy una persona). Te ayudo a preparar los datos de tu <b>Licencia de Navegación</b> en un par de minutos, casi sin escribir.",
+    ca:"Hola! 👋 Sóc un <b>assistent d'IA</b> de <b>Escola Nàutica Palamós</b> (no sóc una persona). T'ajudo a preparar les dades de la teva <b>Llicència de Navegació</b> en un parell de minuts, gairebé sense escriure.",
+    en:"Hi! 👋 I'm an <b>AI assistant</b> from <b>Escola Nàutica Palamós</b> (not a real person). I'll help you prepare the details for your <b>Navigation Licence</b> in a couple of minutes, almost without typing.",
+    fr:"Bonjour ! 👋 Je suis un <b>assistant IA</b> de <b>Escola Nàutica Palamós</b> (je ne suis pas une personne). Je t'aide à préparer les informations de ta <b>Licence de Navigation</b> en deux minutes, presque sans écrire."},
+  consent:{
+    es:"Antes de empezar: ¿aceptas <b>hablar con este asistente de IA</b> y que trate tus datos (incluido el certificado médico) <b>solo</b> para tramitar tu licencia, conforme al RGPD?",
+    ca:"Abans de començar: acceptes <b>parlar amb aquest assistent d'IA</b> i que tracti les teves dades (inclòs el certificat mèdic) <b>només</b> per tramitar la teva llicència, d'acord amb el RGPD?",
+    en:"Before we start: do you agree to <b>talk to this AI assistant</b> and to it processing your data (including the medical certificate) <b>only</b> to handle your licence, in line with GDPR?",
+    fr:"Avant de commencer : acceptes-tu de <b>parler à cet assistant IA</b> et qu'il traite tes données (y compris le certificat médical) <b>uniquement</b> pour gérer ta licence, conformément au RGPD ?"},
+  accept:{es:"✅ Acepto",ca:"✅ Accepto",en:"✅ I agree",fr:"✅ J'accepte"},
+  idAsk:{
+    es:"Empecemos por tu identidad. ¿Cómo prefieres? Envíame una <b>foto de tu DNI/NIE</b> y lo leo yo, o <b>escribe tu número</b> a mano.",
+    ca:"Comencem per la teva identitat. Com ho prefereixes? Envia'm una <b>foto del teu DNI/NIE</b> i el llegeixo jo, o <b>escriu el teu número</b> a mà.",
+    en:"Let's start with your identity. How do you prefer? Send a <b>photo of your DNI/NIE</b> and I'll read it, or <b>type your number</b> by hand.",
+    fr:"Commençons par ton identité. Comment préfères-tu ? Envoie une <b>photo de ton DNI/NIE</b> et je la lis, ou <b>saisis ton numéro</b> à la main."},
+  bPhoto:{es:"📷 Enviar foto",ca:"📷 Enviar foto",en:"📷 Send photo",fr:"📷 Envoyer une photo"},
+  bType:{es:"⌨️ Escribir mi número",ca:"⌨️ Escriure el meu número",en:"⌨️ Type my number",fr:"⌨️ Saisir mon numéro"},
+  askFront:{es:"Perfecto. Envíame una foto de la <b>parte delantera</b> de tu DNI/NIE 📷",ca:"Perfecte. Envia'm una foto de la <b>part del davant</b> del teu DNI/NIE 📷",en:"Great. Send a photo of the <b>front</b> of your DNI/NIE 📷",fr:"Parfait. Envoie une photo du <b>recto</b> de ton DNI/NIE 📷"},
+  bFront:{es:"📷 Parte delantera",ca:"📷 Part del davant",en:"📷 Front side",fr:"📷 Recto"},
+  askBack:{es:"Gracias. Ahora la <b>parte trasera</b> 📷 (ahí está tu dirección).",ca:"Gràcies. Ara la <b>part del darrere</b> 📷 (allà hi ha la teva adreça).",en:"Thanks. Now the <b>back side</b> 📷 (your address is there).",fr:"Merci. Maintenant le <b>verso</b> 📷 (ton adresse y figure)."},
+  bBack:{es:"📷 Parte trasera",ca:"📷 Part del darrere",en:"📷 Back side",fr:"📷 Verso"},
+  reading:{es:"Leyendo el documento… 🔍",ca:"Llegint el document… 🔍",en:"Reading the document… 🔍",fr:"Lecture du document… 🔍"},
+  docTitle:{es:"Datos leídos del documento",ca:"Dades llegides del document",en:"Data read from the document",fr:"Données lues du document"},
+  lName:{es:"Nombre",ca:"Nom",en:"Name",fr:"Prénom"},
+  lSurname:{es:"Apellidos",ca:"Cognoms",en:"Surname",fr:"Nom"},
+  lDob:{es:"Nacimiento",ca:"Naixement",en:"Date of birth",fr:"Naissance"},
+  lNat:{es:"Nacionalidad",ca:"Nacionalitat",en:"Nationality",fr:"Nationalité"},
+  lAddr:{es:"Dirección",ca:"Adreça",en:"Address",fr:"Adresse"},
+  confirmId:{es:"¿Es todo correcto?",ca:"És tot correcte?",en:"Is everything correct?",fr:"Tout est correct ?"},
+  bYes:{es:"✅ Sí, correcto",ca:"✅ Sí, correcte",en:"✅ Yes, correct",fr:"✅ Oui, correct"},
+  bEdit:{es:"✏️ Corregir",ca:"✏️ Corregir",en:"✏️ Fix it",fr:"✏️ Corriger"},
+  editPrompt:{es:"Escribe el dato corregido…",ca:"Escriu la dada corregida…",en:"Type the corrected detail…",fr:"Saisis l'info corrigée…"},
+  editAck:{es:"Anotado, gracias.",ca:"Anotat, gràcies.",en:"Noted, thanks.",fr:"Noté, merci."},
+  askNumber:{es:"Escribe tu número de <b>DNI o NIE</b>",ca:"Escriu el teu número de <b>DNI o NIE</b>",en:"Type your <b>DNI or NIE</b> number",fr:"Saisis ton numéro de <b>DNI ou NIE</b>"},
+  askName:{es:"¿Tu <b>nombre y apellidos</b>?",ca:"El teu <b>nom i cognoms</b>?",en:"Your <b>full name</b>?",fr:"Tes <b>nom et prénom</b> ?"},
+  askDob:{es:"¿Tu <b>fecha de nacimiento</b>? (dd/mm/aaaa)",ca:"La teva <b>data de naixement</b>? (dd/mm/aaaa)",en:"Your <b>date of birth</b>? (dd/mm/yyyy)",fr:"Ta <b>date de naissance</b> ? (jj/mm/aaaa)"},
+  addrFromCard:{es:"En tu documento consta esta dirección:\n<b>{addr}</b>\n¿Es tu domicilio actual?",ca:"Al teu document hi consta aquesta adreça:\n<b>{addr}</b>\nÉs el teu domicili actual?",en:"Your document shows this address:\n<b>{addr}</b>\nIs this your current home address?",fr:"Ton document indique cette adresse :\n<b>{addr}</b>\nEst-ce ton domicile actuel ?"},
+  bAddrYes:{es:"✅ Sí, es correcta",ca:"✅ Sí, és correcta",en:"✅ Yes, correct",fr:"✅ Oui, correcte"},
+  bAddrNo:{es:"✏️ No, corregir",ca:"✏️ No, corregir",en:"✏️ No, change it",fr:"✏️ Non, corriger"},
+  askAddr:{es:"¿Cuál es tu <b>domicilio</b>? (calle, número, ciudad, CP)",ca:"Quin és el teu <b>domicili</b>? (carrer, número, ciutat, CP)",en:"What's your <b>home address</b>? (street, number, city, postcode)",fr:"Quelle est ton <b>adresse</b> ? (rue, numéro, ville, CP)"},
+  askEmail:{es:"¿A qué <b>correo</b> te envío la licencia y los avisos?",ca:"A quin <b>correu</b> t'envio la llicència i els avisos?",en:"Which <b>email</b> should I send the licence and updates to?",fr:"À quel <b>e-mail</b> dois-je envoyer la licence et les avis ?"},
+  emailBad:{es:"Mmm, ese correo no parece válido 🤔. ¿Lo reenvías?",ca:"Mmm, aquest correu no sembla vàlid 🤔. El pots tornar a enviar?",en:"Hmm, that email doesn't look valid 🤔. Could you resend it?",fr:"Hmm, cet e-mail ne semble pas valide 🤔. Tu peux le renvoyer ?"},
+  medIntro:{
+    es:"Último paso clave: el <b>certificado médico psicotécnico</b>.\nPor privacidad de los datos médicos <b>no va por WhatsApp</b>: te abro un <b>enlace seguro</b> donde lo subes. Leo solo la fecha y la validez, y <b>no guardo la imagen</b>.",
+    ca:"Últim pas clau: el <b>certificat mèdic psicotècnic</b>.\nPer privacitat de les dades mèdiques <b>no va per WhatsApp</b>: t'obro un <b>enllaç segur</b> on el puges. Llegeixo només la data i la validesa, i <b>no guardo la imatge</b>.",
+    en:"Last key step: the <b>medical (psychotechnical) certificate</b>.\nFor medical-data privacy it <b>doesn't go through WhatsApp</b>: I open a <b>secure link</b> where you upload it. I only read the date and validity, and I <b>don't store the image</b>.",
+    fr:"Dernière étape clé : le <b>certificat médical (psychotechnique)</b>.\nPour la confidentialité des données médicales il <b>ne passe pas par WhatsApp</b> : je t'ouvre un <b>lien sécurisé</b> où tu le déposes. Je lis seulement la date et la validité, et je <b>ne conserve pas l'image</b>."},
+  bUpload:{es:"🔒 Subir certificado ahora",ca:"🔒 Pujar el certificat ara",en:"🔒 Upload certificate now",fr:"🔒 Envoyer le certificat"},
+  bNoCert:{es:"⏰ Aún no lo tengo",ca:"⏰ Encara no el tinc",en:"⏰ I don't have it yet",fr:"⏰ Je ne l'ai pas encore"},
+  uploadEcho:{es:"🔒 [abro el enlace seguro y subo el certificado]",ca:"🔒 [obro l'enllaç segur i pujo el certificat]",en:"🔒 [open secure link and upload certificate]",fr:"🔒 [j'ouvre le lien sécurisé et j'envoie le certificat]"},
+  medReading:{es:"Comprobando el certificado… 🔍",ca:"Comprovant el certificat… 🔍",en:"Checking the certificate… 🔍",fr:"Vérification du certificat… 🔍"},
+  medTitle:{es:"Certificado médico",ca:"Certificat mèdic",en:"Medical certificate",fr:"Certificat médical"},
+  lCentre:{es:"Centro",ca:"Centre",en:"Centre",fr:"Centre"},
+  lIssued:{es:"Emitido",ca:"Emès",en:"Issued",fr:"Émis"},
+  lValid:{es:"Válido hasta",ca:"Vàlid fins",en:"Valid until",fr:"Valide jusqu'au"},
+  medOK:{es:"✔ El nombre coincide con tu DNI · ✔ En vigor",ca:"✔ El nom coincideix amb el teu DNI · ✔ Vigent",en:"✔ Name matches your ID · ✔ In force",fr:"✔ Le nom correspond à ta pièce · ✔ En cours de validité"},
+  noCert:{es:"Sin problema. Lo necesitas para emitir la licencia: <b>te lo recordaré automáticamente</b> hasta que lo subas. 👍",ca:"Cap problema. El necessites per emetre la llicència: <b>t'ho recordaré automàticament</b> fins que el pugis. 👍",en:"No problem. You'll need it to issue the licence: <b>I'll remind you automatically</b> until you upload it. 👍",fr:"Pas de souci. Il te faut pour émettre la licence : <b>je te le rappellerai automatiquement</b> jusqu'à l'envoi. 👍"},
+  remTitle:{es:"Recordatorio programado",ca:"Recordatori programat",en:"Reminder scheduled",fr:"Rappel programmé"},
+  remBody:{es:"En 2 días: «Hola {name}, te falta el certificado médico para tu Licencia de Navegación. Súbelo aquí 🔒 …»",ca:"D'aquí a 2 dies: «Hola {name}, et falta el certificat mèdic per a la teva Llicència de Navegació. Puja'l aquí 🔒 …»",en:"In 2 days: \"Hi {name}, you're missing the medical certificate for your Navigation Licence. Upload it here 🔒 …\"",fr:"Dans 2 jours : « Bonjour {name}, il te manque le certificat médical pour ta Licence de Navigation. Dépose-le ici 🔒 … »"},
+  confTitle:{es:"Revisa y <b>confirma</b> tus datos:",ca:"Revisa i <b>confirma</b> les teves dades:",en:"Please review and <b>confirm</b> your details:",fr:"Vérifie et <b>confirme</b> tes informations :"},
+  lPhone:{es:"WhatsApp (detectado)",ca:"WhatsApp (detectat)",en:"WhatsApp (detected)",fr:"WhatsApp (détecté)"},
+  lCourse:{es:"Titulación",ca:"Titulació",en:"Qualification",fr:"Titre"},
+  lMed:{es:"Certificado médico",ca:"Certificat mèdic",en:"Medical certificate",fr:"Certificat médical"},
+  medGot:{es:"✔ recibido y válido",ca:"✔ rebut i vàlid",en:"✔ received and valid",fr:"✔ reçu et valide"},
+  medPend:{es:"⚠ pendiente",ca:"⚠ pendent",en:"⚠ pending",fr:"⚠ en attente"},
+  stComplete:{es:"✅ COMPLETO — listo para que la escuela emita tu licencia",ca:"✅ COMPLET — a punt perquè l'escola emeti la teva llicència",en:"✅ COMPLETE — ready for the school to issue your licence",fr:"✅ COMPLET — prêt pour que l'école émette ta licence"},
+  stPending:{es:"Falta el certificado médico",ca:"Falta el certificat mèdic",en:"Medical certificate missing",fr:"Certificat médical manquant"},
+  confAsk:{es:"¿Confirmas que <b>todo es correcto</b>, incluido tu número?",ca:"Confirmes que <b>tot és correcte</b>, inclòs el teu número?",en:"Do you confirm <b>everything is correct</b>, including your number?",fr:"Confirmes-tu que <b>tout est correct</b>, y compris ton numéro ?"},
+  bConfirm:{es:"✅ Confirmo",ca:"✅ Confirmo",en:"✅ I confirm",fr:"✅ Je confirme"},
+  bFix:{es:"✏️ Corregir algo",ca:"✏️ Corregir alguna cosa",en:"✏️ Change something",fr:"✏️ Corriger qqch"},
+  doneOK:{es:"¡Listo! ✅ La escuela ya tiene todo para emitir tu licencia. Te avisaré cuando esté lista. ⛵🙏",ca:"Llest! ✅ L'escola ja ho té tot per emetre la teva llicència. T'avisaré quan estigui a punt. ⛵🙏",en:"Done! ✅ The school now has everything to issue your licence. I'll let you know when it's ready. ⛵🙏",fr:"C'est fait ! ✅ L'école a tout pour émettre ta licence. Je te préviens dès qu'elle est prête. ⛵🙏"},
+  donePend:{es:"He guardado tus datos. En cuanto subas el certificado médico, tu expediente queda completo. 🙏",ca:"He desat les teves dades. Quan pugis el certificat mèdic, el teu expedient quedarà complet. 🙏",en:"I've saved your details. As soon as you upload the medical certificate, your file is complete. 🙏",fr:"J'ai enregistré tes informations. Dès que tu envoies le certificat médical, ton dossier sera complet. 🙏"},
+  bSimReturn:{es:"▶︎ Simular: vuelvo en 3 días",ca:"▶︎ Simular: torno d'aquí a 3 dies",en:"▶︎ Simulate: I come back in 3 days",fr:"▶︎ Simuler : je reviens dans 3 jours"},
+  daysLater:{es:"— 3 días después —",ca:"— 3 dies després —",en:"— 3 days later —",fr:"— 3 jours plus tard —"},
+  greetBack:{es:"¡Hola de nuevo, {name}! 👋 <b>Recuerdo tus datos.</b> Solo te falta el <b>certificado médico</b> para tu Licencia de Navegación.",ca:"Hola de nou, {name}! 👋 <b>Recordo les teves dades.</b> Només et falta el <b>certificat mèdic</b> per a la teva Llicència de Navegació.",en:"Welcome back, {name}! 👋 <b>I remember your details.</b> You're only missing the <b>medical certificate</b> for your Navigation Licence.",fr:"Re-bonjour, {name} ! 👋 <b>Je me souviens de tes informations.</b> Il te manque seulement le <b>certificat médical</b> pour ta Licence de Navigation."},
+  bSendCert:{es:"📎 Enviar certificado médico",ca:"📎 Enviar certificat mèdic",en:"📎 Send medical certificate",fr:"📎 Envoyer le certificat médical"},
+  bRestart:{es:"↻ Empezar de nuevo",ca:"↻ Tornar a començar",en:"↻ Start again",fr:"↻ Recommencer"},
+  demoEnd:{es:"<i>(Fin de la demo. Así el instructor recibe el expediente ya comprobado, sin perseguir documentos ni revisar erratas a mano.)</i>",ca:"<i>(Fi de la demo. Així l'instructor rep l'expedient ja comprovat, sense perseguir documents ni revisar errades a mà.)</i>",en:"<i>(End of demo. This way the instructor receives the file already checked, without chasing documents or fixing typos by hand.)</i>",fr:"<i>(Fin de la démo. Ainsi l'instructeur reçoit le dossier déjà vérifié, sans courir après les documents ni corriger les fautes à la main.)</i>"}
+};
+const t=(k,vars)=>{let s=(S[k]&&S[k][LANG])||(S[k]&&S[k].es)||k; if(vars)for(const v in vars)s=s.replace('{'+v+'}',vars[v]); return s;};
+
+const data={name:'',surname:'',dni:'',dob:'',nat:'Armenia / España',addr:'',email:'',phone:'+34 6•• ••• 678',course:'Licencia de Navegación',medico:null};
+const CARD_ADDR='Carrer del Mar 12, 17230 Palamós';
+
+function addRow(side,html){const r=document.createElement('div');r.className='row '+side;const b=document.createElement('div');b.className='bubble';b.innerHTML=html+'<span class="t">'+now()+'</span>';r.appendChild(b);chat.appendChild(r);chat.scrollTop=chat.scrollHeight;return b;}
+function addSys(text){const d=document.createElement('div');d.className='sys';d.textContent=text;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;}
+function addDoc(html){const r=document.createElement('div');r.className='row in';const b=document.createElement('div');b.className='bubble doc';b.innerHTML=html;r.appendChild(b);chat.appendChild(r);chat.scrollTop=chat.scrollHeight;}
+async function botSay(html,delay=750){const r=document.createElement('div');r.className='row in';const b=document.createElement('div');b.className='bubble typing';b.innerHTML='<span class="dot"></span><span class="dot"></span><span class="dot"></span>';r.appendChild(b);chat.appendChild(r);chat.scrollTop=chat.scrollHeight;await sleep(delay);b.classList.remove('typing');b.innerHTML=html+'<span class="t">'+now()+'</span>';chat.scrollTop=chat.scrollHeight;}
+function me(text){addRow('out',text);}
+function clearComposer(){composer.innerHTML='';}
+function quick(opts){clearComposer();const w=document.createElement('div');w.className='quick';opts.forEach(o=>{const b=document.createElement('button');if(o.primary)b.className='primary';b.textContent=o.label;b.onclick=()=>{o.onClick&&o.onClick();};w.appendChild(b);});composer.appendChild(w);}
+function textInput(ph,onSend){clearComposer();const w=document.createElement('div');w.className='inputrow';const i=document.createElement('input');i.placeholder=ph;const b=document.createElement('button');b.className='send';b.textContent='➤';const go=()=>{const v=i.value.trim();if(!v)return;onSend(v);};b.onclick=go;i.addEventListener('keydown',e=>{if(e.key==='Enter')go();});w.appendChild(i);w.appendChild(b);composer.appendChild(w);i.focus();}
+
+// ---------- flow ----------
+async function start(){
+  await botSay("🌐 Elige idioma · Tria idioma · Choose language · Choisis la langue",400);
+  quick([
+    {label:'🇪🇸 Español',primary:true,onClick:()=>setLang('es')},
+    {label:'🟨 Català',onClick:()=>setLang('ca')},
+    {label:'🇬🇧 English',onClick:()=>setLang('en')},
+    {label:'🇫🇷 Français',onClick:()=>setLang('fr')}
+  ]);
+}
+function setLang(l){LANG=l;document.documentElement.lang=l;document.getElementById('sub').textContent=t('sub');
+  me(l==='es'?'Español':l==='ca'?'Català':l==='en'?'English':'Français');greet();}
+
+async function greet(){
+  await botSay(t('greeting'));
+  await botSay(t('consent'));
+  quick([{label:t('accept'),primary:true,onClick:identity}]);
+}
+async function identity(){
+  me(t('accept'));
+  await botSay(t('idAsk'));
+  quick([{label:t('bPhoto'),primary:true,onClick:askFront},{label:t('bType'),onClick:typeNumber}]);
+}
+// photo path
+async function askFront(){me(t('bPhoto'));await botSay(t('askFront'));quick([{label:t('bFront'),primary:true,onClick:gotFront}]);}
+async function gotFront(){me('📷 ['+t('bFront').replace('📷 ','')+']');await botSay(t('askBack'));quick([{label:t('bBack'),primary:true,onClick:ocrCard}]);}
+async function ocrCard(){
+  me('📷 ['+t('bBack').replace('📷 ','')+']');
+  await botSay(t('reading'),1200);
+  data.name='Sergey';data.surname='Avakyan';data.dni='Y1234567Z';data.dob='14/05/1985';data.addr=CARD_ADDR;
+  addDoc('<div class="docline"><span class="ico">🪪</span><b>'+t('docTitle')+'</b></div>'+
+    '<div class="field"><b>'+t('lName')+':</b> '+data.name+'</div>'+
+    '<div class="field"><b>'+t('lSurname')+':</b> '+data.surname+'</div>'+
+    '<div class="field"><b>DNI/NIE:</b> '+data.dni+'</div>'+
+    '<div class="field"><b>'+t('lDob')+':</b> '+data.dob+'</div>'+
+    '<div class="field"><b>'+t('lNat')+':</b> '+data.nat+'</div>'+
+    '<div class="field"><b>'+t('lAddr')+':</b> '+data.addr+'</div>');
+  await botSay(t('confirmId'));
+  quick([{label:t('bYes'),primary:true,onClick:addrConfirm},
+    {label:t('bEdit'),onClick:()=>{me(t('bEdit'));textInput(t('editPrompt'),async v=>{me(esc(v));await botSay(t('editAck'));addrConfirm();});}}]);
+}
+async function addrConfirm(){
+  me(t('bYes'));
+  await botSay(t('addrFromCard',{addr:data.addr}));
+  quick([{label:t('bAddrYes'),primary:true,onClick:()=>{me(t('bAddrYes'));emailStep();}},
+    {label:t('bAddrNo'),onClick:()=>{me(t('bAddrNo'));askAddr();}}]);
+}
+// type path
+async function typeNumber(){
+  me(t('bType'));
+  await botSay(t('askNumber'));
+  textInput('Y1234567Z',v=>{data.dni=v.toUpperCase();me(esc(data.dni));askNameType();});
+}
+async function askNameType(){await botSay(t('askName'));textInput('Sergey Avakyan',v=>{const p=v.split(' ');data.name=p.shift();data.surname=p.join(' ');me(esc(v));askDobType();});}
+async function askDobType(){await botSay(t('askDob'));textInput('14/05/1985',v=>{data.dob=v;me(esc(v));askAddr();});}
+async function askAddr(){await botSay(t('askAddr'));textInput('Carrer del Mar 12, 17230 Palamós',v=>{data.addr=v;me(esc(v));emailStep();});}
+// shared tail
+async function emailStep(){
+  await botSay(t('askEmail'));
+  textInput('tu@email.com',async v=>{
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){me(esc(v));await botSay(t('emailBad'));return;}
+    data.email=v;me(esc(v));medStep();
+  });
+}
+async function medStep(){
+  await botSay(t('medIntro'));
+  quick([{label:t('bUpload'),primary:true,onClick:uploadCert},{label:t('bNoCert'),onClick:noCert}]);
+}
+async function uploadCert(){
+  me(t('uploadEcho'));
+  await botSay(t('medReading'),1200);
+  data.medico={centre:'Centro Médico Costa Brava',issued:'02/06/2026',valid:'02/06/2028'};
+  addDoc('<div class="docline"><span class="ico">🩺</span><b>'+t('medTitle')+'</b></div>'+
+    '<div class="field"><b>'+t('lCentre')+':</b> '+data.medico.centre+'</div>'+
+    '<div class="field"><b>'+t('lIssued')+':</b> '+data.medico.issued+'</div>'+
+    '<div class="field"><b>'+t('lValid')+':</b> '+data.medico.valid+'</div>'+
+    '<div class="field ok">'+t('medOK')+'</div>');
+  confirmStep();
+}
+async function noCert(){
+  me(t('bNoCert'));data.medico=null;
+  await botSay(t('noCert'));
+  addDoc('<div class="docline"><span class="ico">⏰</span><b>'+t('remTitle')+'</b></div>'+
+    '<div class="field"><i>'+t('remBody',{name:data.name||'…'})+'</i></div>');
+  confirmStep();
+}
+async function confirmStep(){
+  const has=!!data.medico;
+  await botSay(t('confTitle'));
+  addDoc('<div class="docline"><span class="ico">📋</span><b>'+data.course+'</b></div>'+
+    '<div class="field"><b>'+t('lName')+':</b> '+esc(data.name)+' '+esc(data.surname)+'</div>'+
+    '<div class="field"><b>DNI/NIE:</b> '+esc(data.dni)+'</div>'+
+    '<div class="field"><b>'+t('lDob')+':</b> '+esc(data.dob)+'</div>'+
+    '<div class="field"><b>'+t('lAddr')+':</b> '+esc(data.addr)+'</div>'+
+    '<div class="field"><b>Email:</b> '+esc(data.email)+'</div>'+
+    '<div class="field"><b>'+t('lPhone')+':</b> '+data.phone+'</div>'+
+    '<div class="field"><b>'+t('lMed')+':</b> '+(has?'<span class="ok">'+t('medGot')+'</span>':'<span class="warn">'+t('medPend')+'</span>')+'</div>'+
+    '<hr style="border:none;border-top:1px solid #dce6ee;margin:7px 0">'+
+    '<div class="field">'+(has?'<span class="ok">'+t('stComplete')+'</span>':'<span class="warn">'+t('stPending')+'</span>')+'</div>');
+  await botSay(t('confAsk'));
+  quick([{label:t('bConfirm'),primary:true,onClick:()=>done(has)},
+    {label:t('bFix'),onClick:()=>{me(t('bFix'));textInput(t('editPrompt'),async v=>{me(esc(v));await botSay(t('editAck'));confirmStep();});}}]);
+}
+async function done(has){
+  me(t('bConfirm'));
+  if(has){await botSay(t('doneOK'));await sleep(200);await botSay(t('demoEnd'));quick([{label:t('bRestart'),onClick:()=>location.reload()}]);}
+  else{await botSay(t('donePend'));quick([{label:t('bSimReturn'),primary:true,onClick:returning},{label:t('bRestart'),onClick:()=>location.reload()}]);}
+}
+async function returning(){
+  clearComposer();
+  addSys(t('daysLater'));
+  await botSay(t('greetBack',{name:data.name||'…'}));
+  quick([{label:t('bSendCert'),primary:true,onClick:async()=>{
+    me(t('bSendCert'));await botSay(t('medReading'),1100);
+    data.medico={centre:'Centro Médico Costa Brava',issued:'02/06/2026',valid:'02/06/2028'};
+    addDoc('<div class="docline"><span class="ico">🩺</span><b>'+t('medTitle')+'</b></div>'+
+      '<div class="field"><b>'+t('lValid')+':</b> '+data.medico.valid+'</div>'+
+      '<div class="field ok">'+t('medOK')+'</div>');
+    await botSay(t('doneOK'));await sleep(200);await botSay(t('demoEnd'));
+    quick([{label:t('bRestart'),onClick:()=>location.reload()}]);
+  }}]);
+}
+start();
+</script>
+</body>
+</html>
