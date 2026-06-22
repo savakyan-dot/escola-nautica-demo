@@ -90,6 +90,30 @@
       "offers": { "@type": "Offer", "price": "180", "priceCurrency": "EUR" }
     },
     {
+      "@type": "Course",
+      "name": "PNB — Patró de Navegació Bàsica",
+      "description": "Titulació per governar embarcacions de fins a 8 m i fins a 5 milles de la costa. Inclou examen teòric, 8 h de pràctiques i 4 h de ràdio.",
+      "provider": { "@id": "https://www.escolanauticapalamos.com/#palamos" }
+    },
+    {
+      "@type": "Course",
+      "name": "PER — Patró d'Embarcacions d'Esbarjo",
+      "description": "Titulació per governar embarcacions de fins a 15 m i fins a 12 milles, amb navegació nocturna i entre illes. Inclou examen, 16 h de pràctiques i ràdio de curt abast.",
+      "provider": { "@id": "https://www.escolanauticapalamos.com/#palamos" }
+    },
+    {
+      "@type": "Course",
+      "name": "Patró de Iot",
+      "description": "Titulació per governar embarcacions de fins a 24 m i fins a 150 milles. Requereix el PER, examen i 48 h de pràctiques.",
+      "provider": { "@id": "https://www.escolanauticapalamos.com/#palamos" }
+    },
+    {
+      "@type": "Course",
+      "name": "Capità de Iot",
+      "description": "Màxima titulació de recreo: embarcacions de fins a 24 m sense límit de distància. Requereix el Patró de Iot, examen i 48 h de pràctiques.",
+      "provider": { "@id": "https://www.escolanauticapalamos.com/#palamos" }
+    },
+    {
       "@type": "FAQPage",
       "mainEntity": [
         { "@type": "Question", "name": "Cal fer examen per a la llicència de navegació?",
@@ -309,7 +333,45 @@ section.block{padding:96px 0;position:relative}
 .price .unit{font-size:.78rem;color:var(--muted);font-weight:600}
 .course.feat .price .unit{color:rgba(220,239,235,.7)}
 .price .est{font-size:.66rem;color:var(--sun);font-weight:700;letter-spacing:.05em}
-.course-note{margin-top:20px;font-size:.82rem;color:var(--muted);text-align:center}
+.price .ask{font-family:var(--display);font-size:1.45rem;line-height:1.05;letter-spacing:-.01em;color:var(--sea)}
+.course.feat .price .ask{color:var(--sun-2)}
+.course-grid.full{grid-template-columns:repeat(3,1fr)}
+.course-extra{margin-top:18px;font-size:.9rem;color:var(--ink-soft);text-align:center}
+.course-extra b{font-weight:700;color:var(--ink)}
+.course-note{margin-top:14px;font-size:.82rem;color:var(--muted);text-align:center}
+
+/* ---------- Charter (Lloguer de veler) ---------- */
+.charter{background:linear-gradient(180deg,var(--sea-ink),#0a3b44);color:var(--foam);position:relative;overflow:hidden}
+.charter::before{content:"";position:absolute;bottom:-30%;left:-10%;width:55%;height:150%;background:radial-gradient(circle,rgba(47,198,205,.16),transparent 70%);pointer-events:none}
+.charter .sec-head h2{color:#fff}
+.charter .sec-head .eyebrow{color:var(--turq-bright)}
+.charter .sec-head p{color:rgba(220,239,235,.72)}
+.charter-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center;position:relative}
+.charter-media{position:relative}
+.charter-media .photo-slot{aspect-ratio:4/3;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.16)}
+.charter-media .boat-chip{position:absolute;left:-18px;bottom:30px;background:var(--shell);color:var(--ink);border-radius:var(--r);padding:16px 20px;box-shadow:var(--shadow-lg);border:1px solid var(--line-2)}
+.charter-media .boat-chip b{font-family:var(--display);font-size:1.35rem;display:block;line-height:1.05}
+.charter-media .boat-chip small{font-size:.74rem;color:var(--muted);font-weight:600;letter-spacing:.03em}
+.charter-copy h3{font-size:1.4rem;color:#fff;margin:0 0 14px}
+.charter-specs{list-style:none;margin:0 0 26px;display:grid;grid-template-columns:1fr 1fr;gap:11px 20px}
+.charter-specs li{font-size:.95rem;padding-left:26px;position:relative;color:rgba(220,239,235,.92)}
+.charter-specs li::before{content:"";position:absolute;left:0;top:7px;width:13px;height:8px;border-left:2px solid var(--turq-bright);border-bottom:2px solid var(--turq-bright);transform:rotate(-45deg)}
+.charter-copy .charter-note{font-size:.8rem;color:rgba(220,239,235,.6);margin-top:16px}
+
+/* ---------- Dates / Calendari ---------- */
+.dates{background:var(--bone)}
+.dates-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start}
+.dates-intro p{color:var(--muted);font-size:1.05rem;margin-bottom:16px}
+.dates-intro .btn{margin-top:6px}
+.date-list{display:flex;flex-direction:column;gap:14px}
+.date-row{display:flex;align-items:center;gap:18px;background:var(--shell);border:1px solid var(--line-2);border-radius:var(--r);padding:18px 22px;transition:transform .3s,box-shadow .3s}
+.date-row:hover{transform:translateX(4px);box-shadow:var(--shadow)}
+.date-row .cal{width:56px;height:56px;flex:none;border-radius:14px;background:var(--foam);color:var(--sea);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+.date-row .cal .d{font-family:var(--display);font-size:1.5rem}
+.date-row .cal .m{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+.date-row .dinfo b{font-size:1rem;display:block}
+.date-row .dinfo small{font-size:.85rem;color:var(--muted)}
+.date-row .dtag{margin-left:auto;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sun);font-weight:700;white-space:nowrap}
 
 /* ---------- About / split ---------- */
 .about{background:var(--bone)}
@@ -460,7 +522,9 @@ footer ul a:hover{color:#fff}
   .burger{display:flex}
   .hero-grid{grid-template-columns:1fr;gap:40px}
   .scene-wrap{max-width:420px;margin:0 auto;width:100%}
-  .about-grid,.contact-grid{grid-template-columns:1fr;gap:40px}
+  .about-grid,.contact-grid,.charter-grid,.dates-wrap{grid-template-columns:1fr;gap:40px}
+  .course-grid.full{grid-template-columns:repeat(2,1fr)}
+  .charter-media{max-width:520px}
   .rev-grid{grid-template-columns:1fr}
   .step-grid{grid-template-columns:1fr;gap:34px}
   .step{padding:0 0 0 0}
@@ -479,7 +543,8 @@ footer ul a:hover{color:#fff}
 @media (min-width:981px){.mobile-nav{display:none}}
 @media (max-width:620px){
   .wrap{padding:0 20px}.bar{padding:14px 20px}
-  .course-grid{grid-template-columns:1fr}
+  .course-grid,.course-grid.full{grid-template-columns:1fr}
+  .charter-specs{grid-template-columns:1fr}
   .form .row{grid-template-columns:1fr}
   .rev-top{gap:24px}.rev-score .big{font-size:4rem}
   .foot-grid{grid-template-columns:1fr}
@@ -501,6 +566,8 @@ footer ul a:hover{color:#fff}
     </a>
     <nav class="main" aria-label="Principal">
       <a class="navlink" href="#cursos" data-i18n="nav_courses">Cursos</a>
+      <a class="navlink" href="#lloguer" data-i18n="nav_charter">Lloguer</a>
+      <a class="navlink" href="#dates" data-i18n="nav_dates">Dates</a>
       <a class="navlink" href="#escola" data-i18n="nav_about">L'escola</a>
       <a class="navlink" href="#ressenyes" data-i18n="nav_reviews">Ressenyes</a>
       <a class="navlink" href="#faq" data-i18n="nav_faq">Preguntes</a>
@@ -526,6 +593,8 @@ footer ul a:hover{color:#fff}
 <div class="mobile-nav" id="mobileNav">
   <button class="m-close" id="mClose" aria-label="Tancar">×</button>
   <a href="#cursos" data-i18n="nav_courses">Cursos</a>
+  <a href="#lloguer" data-i18n="nav_charter">Lloguer</a>
+  <a href="#dates" data-i18n="nav_dates">Dates</a>
   <a href="#escola" data-i18n="nav_about">L'escola</a>
   <a href="#ressenyes" data-i18n="nav_reviews">Ressenyes</a>
   <a href="#faq" data-i18n="nav_faq">Preguntes</a>
@@ -594,36 +663,20 @@ footer ul a:hover{color:#fff}
       <h2 data-i18n="courses_h2">Tria la teva titulació</h2>
       <p data-i18n="courses_sub">De la primera sortida a mar fins al iot. Et diem clarament què pots governar, quant dura i quant costa — sense haver de trucar per saber el preu.</p>
     </div>
-    <div class="course-grid">
+    <div class="course-grid full">
       <article class="course feat reveal">
         <span class="tag" data-i18n="course1_tag">La més popular</span>
         <h3 data-i18n="course1_h">Llicència de navegació</h3>
-        <p class="sub" data-i18n="course1_sub">El primer pas. Sense examen.</p>
+        <p class="sub" data-i18n="course1_sub">L'antic "titulín". El primer pas, sense examen.</p>
         <ul>
-          <li data-i18n="course1_l1">Embarcacions a motor de fins a 6 m</li>
+          <li data-i18n="course1_l1">Embarcacions fins a 6 m: motor i vela, i motos d'aigua</li>
           <li data-i18n="course1_l2">Fins a 2 milles de la costa, de dia</li>
-          <li data-i18n="course1_l3">Motos d'aigua incloses</li>
-          <li data-i18n="course1_l4">6 hores de formació · sense examen</li>
+          <li data-i18n="course1_l3">Des de 16 anys · sense examen</li>
+          <li data-i18n="course1_l4">4 h de pràctica + 2 h de teoria</li>
         </ul>
         <div class="price-row">
           <div class="price"><span class="amount">180&nbsp;€</span> <span class="unit" data-i18n="course_total">tot inclòs</span></div>
           <a class="btn btn-sun btn-sm" href="https://wa.me/34670709899?text=Hola%2C%20vull%20apuntar-me%20a%20la%20llic%C3%A8ncia%20de%20navegaci%C3%B3" target="_blank" rel="noopener" data-i18n="course_book">Reservar</a>
-        </div>
-      </article>
-
-      <article class="course reveal">
-        <span class="tag" data-i18n="course2_tag">El més complet</span>
-        <h3>PER</h3>
-        <p class="sub" data-i18n="course2_sub">Patró d'Embarcacions d'Esbarjo</p>
-        <ul>
-          <li data-i18n="course2_l1">Embarcacions de fins a 15 m</li>
-          <li data-i18n="course2_l2">Fins a 12 milles de la costa</li>
-          <li data-i18n="course2_l3">Navegació nocturna</li>
-          <li data-i18n="course2_l4">Teoria + pràctiques + examen</li>
-        </ul>
-        <div class="price-row">
-          <div class="price"><span class="amount">390&nbsp;€</span> <span class="est">*<span data-i18n="course_est">preu d'exemple</span></span></div>
-          <a class="btn btn-ghost btn-sm" href="#contacte" data-i18n="course_info">Informa-te'n</a>
         </div>
       </article>
 
@@ -634,32 +687,148 @@ footer ul a:hover{color:#fff}
         <ul>
           <li data-i18n="course3_l1">Embarcacions de fins a 8 m</li>
           <li data-i18n="course3_l2">Fins a 5 milles de la costa</li>
-          <li data-i18n="course3_l3">Pas natural cap al PER</li>
-          <li data-i18n="course3_l4">Teoria + pràctiques + examen</li>
+          <li data-i18n="course3_l3">Des de 16 anys · examen teòric</li>
+          <li data-i18n="course3_l4">8 h de pràctiques + 4 h de ràdio</li>
         </ul>
         <div class="price-row">
-          <div class="price"><span class="amount">290&nbsp;€</span> <span class="est">*<span data-i18n="course_est">preu d'exemple</span></span></div>
+          <div class="price"><span class="ask" data-i18n="course_ask">Consulta'ns</span></div>
           <a class="btn btn-ghost btn-sm" href="#contacte" data-i18n="course_info">Informa-te'n</a>
         </div>
       </article>
 
       <article class="course reveal">
-        <span class="tag" data-i18n="course4_tag">Sense límits</span>
-        <h3 data-i18n="course4_h">Patró / Capità de Iot</h3>
-        <p class="sub" data-i18n="course4_sub">Per a grans travessies</p>
+        <span class="tag" data-i18n="course2_tag">El més complet</span>
+        <h3>PER</h3>
+        <p class="sub" data-i18n="course2_sub">Patró d'Embarcacions d'Esbarjo</p>
         <ul>
-          <li data-i18n="course4_l1">Embarcacions de fins a 24 m</li>
-          <li data-i18n="course4_l2">Fins a 60–150 milles de la costa</li>
-          <li data-i18n="course4_l3">Navegació d'altura</li>
-          <li data-i18n="course4_l4">Formació avançada + examen</li>
+          <li data-i18n="course2_l1">Embarcacions de fins a 15 m · fins a 12 milles</li>
+          <li data-i18n="course2_l2">Navegació nocturna i entre illes (Balears/Canàries)</li>
+          <li data-i18n="course2_l3">Des de 18 anys · examen</li>
+          <li data-i18n="course2_l4">16 h de pràctiques + ràdio (curt abast)</li>
         </ul>
         <div class="price-row">
-          <div class="price"><span class="amount">490&nbsp;€</span> <span class="est">*<span data-i18n="course_est">preu d'exemple</span></span></div>
+          <div class="price"><span class="ask" data-i18n="course_ask">Consulta'ns</span></div>
+          <a class="btn btn-ghost btn-sm" href="#contacte" data-i18n="course_info">Informa-te'n</a>
+        </div>
+      </article>
+
+      <article class="course reveal">
+        <span class="tag" data-i18n="course5_tag">Travessies llargues</span>
+        <h3 data-i18n="course5_h">Patró de Iot</h3>
+        <p class="sub" data-i18n="course5_sub">Un pas més enllà del PER</p>
+        <ul>
+          <li data-i18n="course5_l1">Embarcacions de fins a 24 m</li>
+          <li data-i18n="course5_l2">Fins a 150 milles de la costa</li>
+          <li data-i18n="course5_l3">Cal tenir el PER · examen</li>
+          <li data-i18n="course5_l4">48 h de pràctiques</li>
+        </ul>
+        <div class="price-row">
+          <div class="price"><span class="ask" data-i18n="course_ask">Consulta'ns</span></div>
+          <a class="btn btn-ghost btn-sm" href="#contacte" data-i18n="course_info">Informa-te'n</a>
+        </div>
+      </article>
+
+      <article class="course reveal">
+        <span class="tag" data-i18n="course6_tag">Sense límits</span>
+        <h3 data-i18n="course6_h">Capità de Iot</h3>
+        <p class="sub" data-i18n="course6_sub">La màxima titulació de recreo</p>
+        <ul>
+          <li data-i18n="course6_l1">Embarcacions de fins a 24 m</li>
+          <li data-i18n="course6_l2">Sense límit de distància a la costa</li>
+          <li data-i18n="course6_l3">Cal tenir el Patró de Iot · examen</li>
+          <li data-i18n="course6_l4">48 h de pràctiques</li>
+        </ul>
+        <div class="price-row">
+          <div class="price"><span class="ask" data-i18n="course_ask">Consulta'ns</span></div>
           <a class="btn btn-ghost btn-sm" href="#contacte" data-i18n="course_info">Informa-te'n</a>
         </div>
       </article>
     </div>
-    <p class="course-note" data-i18n="courses_note">* Demostració: el preu de la llicència (180 €) és real; PNB, PER i Iot són preus d'exemple, es confirmen amb l'escola.</p>
+    <p class="course-extra" data-i18n-html="courses_extra">També oferim: <b>Habilitació a Vela</b> (16 h), <b>Habilitació a Balears</b> (fins a 24 m) i cursos de <b>ràdio</b> (curt i llarg abast).</p>
+    <p class="course-note" data-i18n="courses_note">* Demostració: només el preu de la llicència (180 €) és real. Per a la resta de titulacions, consulta'ns el preu.</p>
+  </div>
+</section>
+
+<!-- ============ CHARTER / LLOGUER ============ -->
+<section class="block charter" id="lloguer">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow" data-i18n="charter_eyebrow">Lloguer de veler</div>
+      <h2 data-i18n="charter_h2">Surt a navegar la Costa Brava</h2>
+      <p data-i18n="charter_sub">El nostre veler, amb patró a bord. Tu gaudeixes del mar; nosaltres ens encarreguem de la resta.</p>
+    </div>
+    <div class="charter-grid">
+      <div class="charter-media reveal">
+        <div class="photo-slot">
+          <img src="assets/alt-sunset-person.jpg" alt="Veler navegant al capvespre davant la Costa Brava" />
+        </div>
+        <div class="boat-chip">
+          <b>NORTH WIND 38</b>
+          <small data-i18n="charter_chip">11,70 m · fins a 8 persones</small>
+        </div>
+      </div>
+      <div class="charter-copy reveal">
+        <h3 data-i18n="charter_boat_h">Veler «NORTH WIND 38»</h3>
+        <ul class="charter-specs">
+          <li data-i18n="charter_s1">11,70 m d'eslora</li>
+          <li data-i18n="charter_s2">Motor Volvo Penta 50 CV</li>
+          <li data-i18n="charter_s3">Fins a 8 persones</li>
+          <li data-i18n="charter_s4">3 cabines</li>
+          <li data-i18n="charter_s5">Amb patró inclòs</li>
+          <li data-i18n="charter_s6">VHF, GPS-plotter i AIS</li>
+          <li data-i18n="charter_s7">Pilot automàtic</li>
+          <li data-i18n="charter_s8">Radiobalisa (EPIRB)</li>
+        </ul>
+        <a class="btn btn-sun" href="https://wa.me/34670709899?text=Hola%2C%20vull%20informaci%C3%B3%20sobre%20el%20lloguer%20del%20veler" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:1.15em;height:1.15em"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.515 5.26l-.999 3.648 3.973-1.207z"/></svg>
+          <span data-i18n="charter_cta">Demana disponibilitat</span>
+        </a>
+        <p class="charter-note" data-i18n="charter_note">Sortides per la Costa Brava. Preu i dates: consulta'ns pel WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DATES / CALENDARI ============ -->
+<section class="block dates" id="dates">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow" data-i18n="dates_eyebrow">Properes dates</div>
+      <h2 data-i18n="dates_h2">Quan podem començar</h2>
+      <p data-i18n="dates_sub">Fem cursos de Llicència de navegació cada mes a Palamós. Per al PNB i el PER, et preparem per a les dates d'examen oficial al llarg de l'any.</p>
+    </div>
+    <div class="dates-wrap">
+      <div class="dates-intro reveal">
+        <p data-i18n="dates_intro1">Aquestes són dates d'exemple per ensenyar com es veuria el calendari. Les dates reals te les confirmem al moment per WhatsApp segons disponibilitat.</p>
+        <p data-i18n="dates_intro2">Triem junts el dia que millor et vagi: entre setmana, cap de setmana o intensiu en un sol dia.</p>
+        <a class="btn btn-wa" href="https://wa.me/34670709899?text=Hola%2C%20vull%20saber%20les%20properes%20dates%20de%20curs" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:1.15em;height:1.15em"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.515 5.26l-.999 3.648 3.973-1.207z"/></svg>
+          <span data-i18n="dates_cta">Demana les dates reals</span>
+        </a>
+      </div>
+      <div class="date-list reveal">
+        <div class="date-row">
+          <div class="cal"><span class="d">14</span><span class="m" data-i18n="dates_mon_jul">Jul</span></div>
+          <div class="dinfo"><b data-i18n="dates_r1_t">Llicència de navegació</b><small data-i18n="dates_r1_s">Palamós · intensiu en un dia</small></div>
+          <span class="dtag" data-i18n="dates_example">exemple</span>
+        </div>
+        <div class="date-row">
+          <div class="cal"><span class="d">28</span><span class="m" data-i18n="dates_mon_jul">Jul</span></div>
+          <div class="dinfo"><b data-i18n="dates_r2_t">Llicència de navegació</b><small data-i18n="dates_r2_s">Palamós · cap de setmana</small></div>
+          <span class="dtag" data-i18n="dates_example">exemple</span>
+        </div>
+        <div class="date-row">
+          <div class="cal"><span class="d">09</span><span class="m" data-i18n="dates_mon_sep">Set</span></div>
+          <div class="dinfo"><b data-i18n="dates_r3_t">PNB — preparació</b><small data-i18n="dates_r3_s">Girona · cap a l'examen oficial</small></div>
+          <span class="dtag" data-i18n="dates_example">exemple</span>
+        </div>
+        <div class="date-row">
+          <div class="cal"><span class="d">23</span><span class="m" data-i18n="dates_mon_sep">Set</span></div>
+          <div class="dinfo"><b data-i18n="dates_r4_t">PER — preparació</b><small data-i18n="dates_r4_s">Girona · cap a l'examen oficial</small></div>
+          <span class="dtag" data-i18n="dates_example">exemple</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -759,6 +928,10 @@ footer ul a:hover{color:#fff}
       <div class="qa"><button aria-expanded="false"><span data-i18n="faq3_q">Què puc governar amb la llicència?</span><span class="ic" aria-hidden="true"></span></button><div class="ans"><p data-i18n="faq3_a">Embarcacions a motor de fins a 6 metres i motos d'aigua, dins de 2 milles de la costa i de dia. Si vols anar més lluny, et preparem el PNB o el PER.</p></div></div>
       <div class="qa"><button aria-expanded="false"><span data-i18n="faq4_q">On sou i en quins idiomes feu el curs?</span><span class="ic" aria-hidden="true"></span></button><div class="ans"><p data-i18n="faq4_a">Tenim escola a Palamós (al port) i a Girona. Mateix equip i mateix telèfon. Fem la formació en català, castellà, anglès i francès.</p></div></div>
       <div class="qa"><button aria-expanded="false"><span data-i18n="faq5_q">Necessito experiència prèvia?</span><span class="ic" aria-hidden="true"></span></button><div class="ans"><p data-i18n="faq5_a">Cap ni una. La majoria d'alumnes no havia tocat mai un timó. Comencem de zero i sortim a mar el mateix dia.</p></div></div>
+      <div class="qa"><button aria-expanded="false"><span data-i18n="faq6_q">Quina titulació necessito segons el que vull fer?</span><span class="ic" aria-hidden="true"></span></button><div class="ans"><p data-i18n="faq6_a">Per a una llanxa petita o moto d'aigua a prop de la costa, la Llicència. Per anar més lluny o de nit, el PER. Si tens dubtes, explica'ns què vols fer i et diem la titulació justa, sense que paguis de més.</p></div></div>
+      <div class="qa"><button aria-expanded="false"><span data-i18n="faq7_q">Quina diferència hi ha entre PNB, PER i Iot?</span><span class="ic" aria-hidden="true"></span></button><div class="ans"><p data-i18n="faq7_a">El PNB arriba a 8 m i 5 milles; el PER, a 15 m, 12 milles i de nit, i deixa creuar entre illes. El Patró de Iot puja a 24 m i 150 milles, i el Capità de Iot treu el límit de distància. Cadascun necessita l'anterior.</p></div></div>
+      <div class="qa"><button aria-expanded="false"><span data-i18n="faq8_q">Feu pràctiques de vela?</span><span class="ic" aria-hidden="true"></span></button><div class="ans"><p data-i18n="faq8_a">Sí. Tenim l'Habilitació a Vela (16 h) per afegir la vela a la teva titulació, i fem les pràctiques al nostre veler navegant de debò per la Costa Brava.</p></div></div>
+      <div class="qa"><button aria-expanded="false"><span data-i18n="faq9_q">Llogueu vaixells o feu sortides amb patró?</span><span class="ic" aria-hidden="true"></span></button><div class="ans"><p data-i18n="faq9_a">Sí. Disposem del veler «NORTH WIND 38» (11,70 m, fins a 8 persones) amb patró a bord per a sortides per la Costa Brava. Escriu-nos pel WhatsApp i et diem disponibilitat i preu.</p></div></div>
     </div>
   </div>
 </section>
@@ -814,6 +987,7 @@ footer ul a:hover{color:#fff}
               <option data-i18n="form_opt1">Llicència de navegació (180 €)</option>
               <option>PNB</option><option>PER</option>
               <option data-i18n="form_opt2">Patró / Capità de Iot</option>
+              <option data-i18n="form_opt4">Lloguer de veler</option>
               <option data-i18n="form_opt3">Encara no ho sé</option>
             </select>
           </div>
@@ -858,7 +1032,7 @@ footer ul a:hover{color:#fff}
           <a href="https://wa.me/34670709899" aria-label="WhatsApp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.515 5.26l-.999 3.648 3.973-1.207z"/></svg></a>
         </div>
       </div>
-      <div><h4 data-i18n="foot_courses">Cursos</h4><ul><li><a href="#cursos" data-i18n="course1_h">Llicència de navegació</a></li><li><a href="#cursos">PNB</a></li><li><a href="#cursos">PER</a></li><li><a href="#cursos" data-i18n="course4_h">Patró / Capità de Iot</a></li></ul></div>
+      <div><h4 data-i18n="foot_courses">Cursos</h4><ul><li><a href="#cursos" data-i18n="course1_h">Llicència de navegació</a></li><li><a href="#cursos">PNB</a></li><li><a href="#cursos">PER</a></li><li><a href="#cursos" data-i18n="course5_h">Patró de Iot</a></li><li><a href="#cursos" data-i18n="course6_h">Capità de Iot</a></li><li><a href="#lloguer" data-i18n="nav_charter">Lloguer</a></li><li><a href="#dates" data-i18n="nav_dates">Dates</a></li></ul></div>
       <div><h4 data-i18n="foot_school">L'escola</h4><ul><li><a href="#escola" data-i18n="nav_about">L'escola</a></li><li><a href="#ressenyes" data-i18n="nav_reviews">Ressenyes</a></li><li><a href="#faq" data-i18n="nav_faq">Preguntes</a></li><li><a href="#contacte" data-i18n="nav_contact">Contacte</a></li></ul></div>
       <div><h4 data-i18n="foot_contact_t">Contacte</h4><ul><li><a href="https://wa.me/34670709899" target="_blank" rel="noopener">WhatsApp +34 670 70 98 99</a></li><li><a href="mailto:enp@escolanauticapalamos.com">enp@escolanauticapalamos.com</a></li><li>Palamós · Girona</li></ul></div>
     </div>
@@ -879,7 +1053,7 @@ document.documentElement.classList.add('js');
 /* ============ i18n ============ */
 const I18N = {
   ca:{
-    brand_sub:"Palamós · Girona",nav_courses:"Cursos",nav_about:"L'escola",nav_reviews:"Ressenyes",nav_faq:"Preguntes",nav_contact:"Contacte",nav_wa:"WhatsApp",
+    brand_sub:"Palamós · Girona",nav_courses:"Cursos",nav_charter:"Lloguer",nav_dates:"Dates",nav_about:"L'escola",nav_reviews:"Ressenyes",nav_faq:"Preguntes",nav_contact:"Contacte",nav_wa:"WhatsApp",
     hero_eyebrow:"Costa Brava · des de 2005",
     hero_h1:'Navega aquest <span class="em"><b>estiu</b></span>.<br>La llicència, en un dia.',
     hero_lead:"Treu-te la llicència de navegació amb en Sergi a Palamós o Girona: 6 hores, sense examen, i ja pots sortir a mar. Senzill, proper i homologat per la Generalitat.",
@@ -887,12 +1061,27 @@ const I18N = {
     scene_note:"Aquí va una foto real de l'escola",
     float_quote:'"En Sergi t\'ho explica tot amb molta paciència. Vam acabar navegant el mateix dia."',float_who:"Marc R. · Ressenya a Google",float_badge:"anys a mar",
     courses_eyebrow:"Titulacions",courses_h2:"Tria la teva titulació",courses_sub:"De la primera sortida a mar fins al iot. Et diem clarament què pots governar, quant dura i quant costa — sense haver de trucar per saber el preu.",
-    course1_tag:"La més popular",course1_h:"Llicència de navegació",course1_sub:"El primer pas. Sense examen.",course1_l1:"Embarcacions a motor de fins a 6 m",course1_l2:"Fins a 2 milles de la costa, de dia",course1_l3:"Motos d'aigua incloses",course1_l4:"6 hores de formació · sense examen",
-    course2_tag:"El més complet",course2_sub:"Patró d'Embarcacions d'Esbarjo",course2_l1:"Embarcacions de fins a 15 m",course2_l2:"Fins a 12 milles de la costa",course2_l3:"Navegació nocturna",course2_l4:"Teoria + pràctiques + examen",
-    course3_tag:"Per començar fort",course3_sub:"Patró de Navegació Bàsica",course3_l1:"Embarcacions de fins a 8 m",course3_l2:"Fins a 5 milles de la costa",course3_l3:"Pas natural cap al PER",course3_l4:"Teoria + pràctiques + examen",
+    course1_tag:"La més popular",course1_h:"Llicència de navegació",course1_sub:'L\'antic "titulín". El primer pas, sense examen.',course1_l1:"Embarcacions fins a 6 m: motor i vela, i motos d'aigua",course1_l2:"Fins a 2 milles de la costa, de dia",course1_l3:"Des de 16 anys · sense examen",course1_l4:"4 h de pràctica + 2 h de teoria",
+    course2_tag:"El més complet",course2_sub:"Patró d'Embarcacions d'Esbarjo",course2_l1:"Embarcacions de fins a 15 m · fins a 12 milles",course2_l2:"Navegació nocturna i entre illes (Balears/Canàries)",course2_l3:"Des de 18 anys · examen",course2_l4:"16 h de pràctiques + ràdio (curt abast)",
+    course3_tag:"Per començar fort",course3_sub:"Patró de Navegació Bàsica",course3_l1:"Embarcacions de fins a 8 m",course3_l2:"Fins a 5 milles de la costa",course3_l3:"Des de 16 anys · examen teòric",course3_l4:"8 h de pràctiques + 4 h de ràdio",
     course4_tag:"Sense límits",course4_h:"Patró / Capità de Iot",course4_sub:"Per a grans travessies",course4_l1:"Embarcacions de fins a 24 m",course4_l2:"Fins a 60–150 milles de la costa",course4_l3:"Navegació d'altura",course4_l4:"Formació avançada + examen",
-    course_total:"tot inclòs",course_est:"preu d'exemple",course_book:"Reservar",course_info:"Informa-te'n",
-    courses_note:"* Demostració: el preu de la llicència (180 €) és real; PNB, PER i Iot són preus d'exemple, es confirmen amb l'escola.",
+    course5_tag:"Travessies llargues",course5_h:"Patró de Iot",course5_sub:"Un pas més enllà del PER",course5_l1:"Embarcacions de fins a 24 m",course5_l2:"Fins a 150 milles de la costa",course5_l3:"Cal tenir el PER · examen",course5_l4:"48 h de pràctiques",
+    course6_tag:"Sense límits",course6_h:"Capità de Iot",course6_sub:"La màxima titulació de recreo",course6_l1:"Embarcacions de fins a 24 m",course6_l2:"Sense límit de distància a la costa",course6_l3:"Cal tenir el Patró de Iot · examen",course6_l4:"48 h de pràctiques",
+    course_total:"tot inclòs",course_est:"preu d'exemple",course_book:"Reservar",course_info:"Informa-te'n",course_ask:"Consulta'ns",
+    courses_extra:"També oferim: <b>Habilitació a Vela</b> (16 h), <b>Habilitació a Balears</b> (fins a 24 m) i cursos de <b>ràdio</b> (curt i llarg abast).",
+    courses_note:"* Demostració: només el preu de la llicència (180 €) és real. Per a la resta de titulacions, consulta'ns el preu.",
+    charter_eyebrow:"Lloguer de veler",charter_h2:"Surt a navegar la Costa Brava",charter_sub:"El nostre veler, amb patró a bord. Tu gaudeixes del mar; nosaltres ens encarreguem de la resta.",
+    charter_chip:"11,70 m · fins a 8 persones",charter_boat_h:"Veler «NORTH WIND 38»",
+    charter_s1:"11,70 m d'eslora",charter_s2:"Motor Volvo Penta 50 CV",charter_s3:"Fins a 8 persones",charter_s4:"3 cabines",charter_s5:"Amb patró inclòs",charter_s6:"VHF, GPS-plotter i AIS",charter_s7:"Pilot automàtic",charter_s8:"Radiobalisa (EPIRB)",
+    charter_cta:"Demana disponibilitat",charter_note:"Sortides per la Costa Brava. Preu i dates: consulta'ns pel WhatsApp.",
+    dates_eyebrow:"Properes dates",dates_h2:"Quan podem començar",dates_sub:"Fem cursos de Llicència de navegació cada mes a Palamós. Per al PNB i el PER, et preparem per a les dates d'examen oficial al llarg de l'any.",
+    dates_intro1:"Aquestes són dates d'exemple per ensenyar com es veuria el calendari. Les dates reals te les confirmem al moment per WhatsApp segons disponibilitat.",
+    dates_intro2:"Triem junts el dia que millor et vagi: entre setmana, cap de setmana o intensiu en un sol dia.",
+    dates_cta:"Demana les dates reals",dates_example:"exemple",dates_mon_jul:"Jul",dates_mon_sep:"Set",
+    dates_r1_t:"Llicència de navegació",dates_r1_s:"Palamós · intensiu en un dia",
+    dates_r2_t:"Llicència de navegació",dates_r2_s:"Palamós · cap de setmana",
+    dates_r3_t:"PNB — preparació",dates_r3_s:"Girona · cap a l'examen oficial",
+    dates_r4_t:"PER — preparació",dates_r4_s:"Girona · cap a l'examen oficial",
     about_photo:"Foto real d'en Sergi i els alumnes al port de Palamós",about_chip:"ressenyes · 5,0★",about_eyebrow:"L'escola",about_h2:"Una escola de poble, amb mar de debò",
     about_p1:"Des de fa més de 20 anys ensenyem a navegar a la Costa Brava. No som una acadèmia gran i freda: som en Sergi i un equip petit que coneix cada cala d'aquí.",
     about_p2:"Per això els alumnes ens valoren amb un 5,0★ i ens recomanen pel nom. Aprens de veritat, surts a mar de seguida i te'n vas amb ganes de tornar-hi.",
@@ -913,17 +1102,21 @@ const I18N = {
     faq3_q:"Què puc governar amb la llicència?",faq3_a:"Embarcacions a motor de fins a 6 metres i motos d'aigua, dins de 2 milles de la costa i de dia. Si vols anar més lluny, et preparem el PNB o el PER.",
     faq4_q:"On sou i en quins idiomes feu el curs?",faq4_a:"Tenim escola a Palamós (al port) i a Girona. Mateix equip i mateix telèfon. Fem la formació en català, castellà, anglès i francès.",
     faq5_q:"Necessito experiència prèvia?",faq5_a:"Cap ni una. La majoria d'alumnes no havia tocat mai un timó. Comencem de zero i sortim a mar el mateix dia.",
+    faq6_q:"Quina titulació necessito segons el que vull fer?",faq6_a:"Per a una llanxa petita o moto d'aigua a prop de la costa, la Llicència. Per anar més lluny o de nit, el PER. Si tens dubtes, explica'ns què vols fer i et diem la titulació justa, sense que paguis de més.",
+    faq7_q:"Quina diferència hi ha entre PNB, PER i Iot?",faq7_a:"El PNB arriba a 8 m i 5 milles; el PER, a 15 m, 12 milles i de nit, i deixa creuar entre illes. El Patró de Iot puja a 24 m i 150 milles, i el Capità de Iot treu el límit de distància. Cadascun necessita l'anterior.",
+    faq8_q:"Feu pràctiques de vela?",faq8_a:"Sí. Tenim l'Habilitació a Vela (16 h) per afegir la vela a la teva titulació, i fem les pràctiques al nostre veler navegant de debò per la Costa Brava.",
+    faq9_q:"Llogueu vaixells o feu sortides amb patró?",faq9_a:"Sí. Disposem del veler «NORTH WIND 38» (11,70 m, fins a 8 persones) amb patró a bord per a sortides per la Costa Brava. Escriu-nos pel WhatsApp i et diem disponibilitat i preu.",
     contact_eyebrow:"Contacte",contact_h2:"Parlem? Triga un minut",loc_open:"Al port · Dilluns a dissabte",loc_open2:"Al centre · Dilluns a divendres",
     wa_box_h:"La via més ràpida",wa_box_p:"A la Costa Brava tothom va per WhatsApp. Escriu-nos i et responem de seguida, com una persona.",wa_box_btn:"Obrir WhatsApp",
     form_h:"O deixa'ns les dades",form_p:"Et truquem o t'escrivim nosaltres. Sense compromís.",form_name:"Nom",form_phone:"Telèfon",form_course:"Quin curs t'interessa?",
-    form_opt1:"Llicència de navegació (180 €)",form_opt2:"Patró / Capità de Iot",form_opt3:"Encara no ho sé",form_msg:"Missatge (opcional)",form_send:"Enviar",
+    form_opt1:"Llicència de navegació (180 €)",form_opt2:"Patró / Capità de Iot",form_opt4:"Lloguer de veler",form_opt3:"Encara no ho sé",form_msg:"Missatge (opcional)",form_send:"Enviar",
     form_ok_h:"Rebut!",form_ok_p:"Et contactem ben aviat. (Demostració: aquest formulari no envia res de debò.)",
     final_h:'Aquest estiu el passes <em>a mar</em>.',final_p:"Una titulació, un dia, i tota la Costa Brava per davant. Comença amb un missatge.",final_cta:"Comença pel WhatsApp",
     foot_p:"Escola nàutica homologada per la Generalitat de Catalunya. Més de 20 anys ensenyant a navegar a la Costa Brava.",
     foot_courses:"Cursos",foot_school:"L'escola",foot_contact_t:"Contacte",foot_rights:"Tots els drets reservats",foot_demo:"Demostració de disseny feta per al projecte Rumbo · cap dada no s'envia ni es desa"
   },
   es:{
-    brand_sub:"Palamós · Girona",nav_courses:"Cursos",nav_about:"La escuela",nav_reviews:"Reseñas",nav_faq:"Preguntas",nav_contact:"Contacto",nav_wa:"WhatsApp",
+    brand_sub:"Palamós · Girona",nav_courses:"Cursos",nav_charter:"Alquiler",nav_dates:"Fechas",nav_about:"La escuela",nav_reviews:"Reseñas",nav_faq:"Preguntas",nav_contact:"Contacto",nav_wa:"WhatsApp",
     hero_eyebrow:"Costa Brava · desde 2005",
     hero_h1:'Navega este <span class="em"><b>verano</b></span>.<br>La licencia, en un día.',
     hero_lead:"Sácate la licencia de navegación con Sergi en Palamós o Girona: 6 horas, sin examen, y ya puedes salir al mar. Sencillo, cercano y homologado por la Generalitat.",
@@ -931,12 +1124,27 @@ const I18N = {
     scene_note:"Aquí va una foto real de la escuela",
     float_quote:'"Sergi te lo explica todo con mucha paciencia. Acabamos navegando el mismo día."',float_who:"Marc R. · Reseña en Google",float_badge:"años en la mar",
     courses_eyebrow:"Titulaciones",courses_h2:"Elige tu titulación",courses_sub:"De la primera salida al mar hasta el yate. Te decimos claramente qué puedes gobernar, cuánto dura y cuánto cuesta — sin tener que llamar para saber el precio.",
-    course1_tag:"La más popular",course1_h:"Licencia de navegación",course1_sub:"El primer paso. Sin examen.",course1_l1:"Embarcaciones a motor de hasta 6 m",course1_l2:"Hasta 2 millas de la costa, de día",course1_l3:"Motos de agua incluidas",course1_l4:"6 horas de formación · sin examen",
-    course2_tag:"La más completa",course2_sub:"Patrón de Embarcaciones de Recreo",course2_l1:"Embarcaciones de hasta 15 m",course2_l2:"Hasta 12 millas de la costa",course2_l3:"Navegación nocturna",course2_l4:"Teoría + prácticas + examen",
-    course3_tag:"Para empezar fuerte",course3_sub:"Patrón de Navegación Básica",course3_l1:"Embarcaciones de hasta 8 m",course3_l2:"Hasta 5 millas de la costa",course3_l3:"Paso natural hacia el PER",course3_l4:"Teoría + prácticas + examen",
+    course1_tag:"La más popular",course1_h:"Licencia de navegación",course1_sub:'El antiguo "titulín". El primer paso, sin examen.',course1_l1:"Embarcaciones hasta 6 m: motor y vela, y motos de agua",course1_l2:"Hasta 2 millas de la costa, de día",course1_l3:"Desde 16 años · sin examen",course1_l4:"4 h de práctica + 2 h de teoría",
+    course2_tag:"La más completa",course2_sub:"Patrón de Embarcaciones de Recreo",course2_l1:"Embarcaciones de hasta 15 m · hasta 12 millas",course2_l2:"Navegación nocturna y entre islas (Baleares/Canarias)",course2_l3:"Desde 18 años · examen",course2_l4:"16 h de prácticas + radio (corto alcance)",
+    course3_tag:"Para empezar fuerte",course3_sub:"Patrón de Navegación Básica",course3_l1:"Embarcaciones de hasta 8 m",course3_l2:"Hasta 5 millas de la costa",course3_l3:"Desde 16 años · examen teórico",course3_l4:"8 h de prácticas + 4 h de radio",
     course4_tag:"Sin límites",course4_h:"Patrón / Capitán de Yate",course4_sub:"Para grandes travesías",course4_l1:"Embarcaciones de hasta 24 m",course4_l2:"Hasta 60–150 millas de la costa",course4_l3:"Navegación de altura",course4_l4:"Formación avanzada + examen",
-    course_total:"todo incluido",course_est:"precio de ejemplo",course_book:"Reservar",course_info:"Infórmate",
-    courses_note:"* Demostración: el precio de la licencia (180 €) es real; PNB, PER y Yate son precios de ejemplo, se confirman con la escuela.",
+    course5_tag:"Travesías largas",course5_h:"Patrón de Yate",course5_sub:"Un paso más allá del PER",course5_l1:"Embarcaciones de hasta 24 m",course5_l2:"Hasta 150 millas de la costa",course5_l3:"Requiere el PER · examen",course5_l4:"48 h de prácticas",
+    course6_tag:"Sin límites",course6_h:"Capitán de Yate",course6_sub:"La máxima titulación de recreo",course6_l1:"Embarcaciones de hasta 24 m",course6_l2:"Sin límite de distancia a la costa",course6_l3:"Requiere el Patrón de Yate · examen",course6_l4:"48 h de prácticas",
+    course_total:"todo incluido",course_est:"precio de ejemplo",course_book:"Reservar",course_info:"Infórmate",course_ask:"Consúltanos",
+    courses_extra:"También ofrecemos: <b>Habilitación de Vela</b> (16 h), <b>Habilitación de Baleares</b> (hasta 24 m) y cursos de <b>radio</b> (corto y largo alcance).",
+    courses_note:"* Demostración: solo el precio de la licencia (180 €) es real. Para el resto de titulaciones, consúltanos el precio.",
+    charter_eyebrow:"Alquiler de velero",charter_h2:"Sal a navegar la Costa Brava",charter_sub:"Nuestro velero, con patrón a bordo. Tú disfrutas del mar; nosotros nos encargamos del resto.",
+    charter_chip:"11,70 m · hasta 8 personas",charter_boat_h:"Velero «NORTH WIND 38»",
+    charter_s1:"11,70 m de eslora",charter_s2:"Motor Volvo Penta 50 CV",charter_s3:"Hasta 8 personas",charter_s4:"3 camarotes",charter_s5:"Con patrón incluido",charter_s6:"VHF, GPS-plotter y AIS",charter_s7:"Piloto automático",charter_s8:"Radiobaliza (EPIRB)",
+    charter_cta:"Pide disponibilidad",charter_note:"Salidas por la Costa Brava. Precio y fechas: consúltanos por WhatsApp.",
+    dates_eyebrow:"Próximas fechas",dates_h2:"Cuándo podemos empezar",dates_sub:"Hacemos cursos de Licencia de navegación cada mes en Palamós. Para el PNB y el PER, te preparamos para las fechas de examen oficial a lo largo del año.",
+    dates_intro1:"Estas son fechas de ejemplo para mostrar cómo se vería el calendario. Las fechas reales te las confirmamos al momento por WhatsApp según disponibilidad.",
+    dates_intro2:"Elegimos juntos el día que mejor te vaya: entre semana, fin de semana o intensivo en un solo día.",
+    dates_cta:"Pide las fechas reales",dates_example:"ejemplo",dates_mon_jul:"Jul",dates_mon_sep:"Sep",
+    dates_r1_t:"Licencia de navegación",dates_r1_s:"Palamós · intensivo en un día",
+    dates_r2_t:"Licencia de navegación",dates_r2_s:"Palamós · fin de semana",
+    dates_r3_t:"PNB — preparación",dates_r3_s:"Girona · hacia el examen oficial",
+    dates_r4_t:"PER — preparación",dates_r4_s:"Girona · hacia el examen oficial",
     about_photo:"Foto real de Sergi y los alumnos en el puerto de Palamós",about_chip:"reseñas · 5,0★",about_eyebrow:"La escuela",about_h2:"Una escuela de pueblo, con mar de verdad",
     about_p1:"Desde hace más de 20 años enseñamos a navegar en la Costa Brava. No somos una academia grande y fría: somos Sergi y un equipo pequeño que conoce cada cala de aquí.",
     about_p2:"Por eso los alumnos nos valoran con un 5,0★ y nos recomiendan por el nombre. Aprendes de verdad, sales al mar enseguida y te vas con ganas de volver.",
@@ -957,17 +1165,21 @@ const I18N = {
     faq3_q:"¿Qué puedo gobernar con la licencia?",faq3_a:"Embarcaciones a motor de hasta 6 metros y motos de agua, dentro de 2 millas de la costa y de día. Si quieres ir más lejos, te preparamos el PNB o el PER.",
     faq4_q:"¿Dónde estáis y en qué idiomas dais el curso?",faq4_a:"Tenemos escuela en Palamós (en el puerto) y en Girona. Mismo equipo y mismo teléfono. Damos la formación en catalán, castellano, inglés y francés.",
     faq5_q:"¿Necesito experiencia previa?",faq5_a:"Ninguna. La mayoría de alumnos no había tocado nunca un timón. Empezamos de cero y salimos al mar el mismo día.",
+    faq6_q:"¿Qué titulación necesito según lo que quiero hacer?",faq6_a:"Para una lancha pequeña o moto de agua cerca de la costa, la Licencia. Para ir más lejos o de noche, el PER. Si tienes dudas, cuéntanos qué quieres hacer y te decimos la titulación justa, sin que pagues de más.",
+    faq7_q:"¿Qué diferencia hay entre PNB, PER y Yate?",faq7_a:"El PNB llega a 8 m y 5 millas; el PER, a 15 m, 12 millas y de noche, y permite cruzar entre islas. El Patrón de Yate sube a 24 m y 150 millas, y el Capitán de Yate quita el límite de distancia. Cada uno necesita el anterior.",
+    faq8_q:"¿Hacéis prácticas de vela?",faq8_a:"Sí. Tenemos la Habilitación de Vela (16 h) para añadir la vela a tu titulación, y hacemos las prácticas en nuestro velero navegando de verdad por la Costa Brava.",
+    faq9_q:"¿Alquiláis barcos o hacéis salidas con patrón?",faq9_a:"Sí. Disponemos del velero «NORTH WIND 38» (11,70 m, hasta 8 personas) con patrón a bordo para salidas por la Costa Brava. Escríbenos por WhatsApp y te decimos disponibilidad y precio.",
     contact_eyebrow:"Contacto",contact_h2:"¿Hablamos? Tarda un minuto",loc_open:"En el puerto · Lunes a sábado",loc_open2:"En el centro · Lunes a viernes",
     wa_box_h:"La vía más rápida",wa_box_p:"En la Costa Brava todo el mundo va por WhatsApp. Escríbenos y te respondemos enseguida, como una persona.",wa_box_btn:"Abrir WhatsApp",
     form_h:"O déjanos tus datos",form_p:"Te llamamos o te escribimos nosotros. Sin compromiso.",form_name:"Nombre",form_phone:"Teléfono",form_course:"¿Qué curso te interesa?",
-    form_opt1:"Licencia de navegación (180 €)",form_opt2:"Patrón / Capitán de Yate",form_opt3:"Aún no lo sé",form_msg:"Mensaje (opcional)",form_send:"Enviar",
+    form_opt1:"Licencia de navegación (180 €)",form_opt2:"Patrón / Capitán de Yate",form_opt4:"Alquiler de velero",form_opt3:"Aún no lo sé",form_msg:"Mensaje (opcional)",form_send:"Enviar",
     form_ok_h:"¡Recibido!",form_ok_p:"Te contactamos muy pronto. (Demostración: este formulario no envía nada de verdad.)",
     final_h:'Este verano lo pasas <em>en el mar</em>.',final_p:"Una titulación, un día, y toda la Costa Brava por delante. Empieza con un mensaje.",final_cta:"Empieza por WhatsApp",
     foot_p:"Escuela náutica homologada por la Generalitat de Catalunya. Más de 20 años enseñando a navegar en la Costa Brava.",
     foot_courses:"Cursos",foot_school:"La escuela",foot_contact_t:"Contacto",foot_rights:"Todos los derechos reservados",foot_demo:"Demostración de diseño hecha para el proyecto Rumbo · ningún dato se envía ni se guarda"
   },
   en:{
-    brand_sub:"Palamós · Girona",nav_courses:"Courses",nav_about:"The school",nav_reviews:"Reviews",nav_faq:"FAQ",nav_contact:"Contact",nav_wa:"WhatsApp",
+    brand_sub:"Palamós · Girona",nav_courses:"Courses",nav_charter:"Charter",nav_dates:"Dates",nav_about:"The school",nav_reviews:"Reviews",nav_faq:"FAQ",nav_contact:"Contact",nav_wa:"WhatsApp",
     hero_eyebrow:"Costa Brava · since 2005",
     hero_h1:'Sail this <span class="em"><b>summer</b></span>.<br>Your licence, in a day.',
     hero_lead:"Get your navigation licence with Sergi in Palamós or Girona: 6 hours, no exam, and you're ready to head out. Simple, friendly and officially accredited by the Generalitat.",
@@ -975,12 +1187,27 @@ const I18N = {
     scene_note:"A real photo of the school goes here",
     float_quote:'"Sergi explains everything so patiently. We were sailing the very same day."',float_who:"Marc R. · Google review",float_badge:"years at sea",
     courses_eyebrow:"Qualifications",courses_h2:"Choose your qualification",courses_sub:"From your first time out at sea to a full yacht. We tell you clearly what you can skipper, how long it takes and what it costs — no need to call just to get a price.",
-    course1_tag:"Most popular",course1_h:"Navigation licence",course1_sub:"The first step. No exam.",course1_l1:"Motorboats up to 6 m",course1_l2:"Up to 2 miles from shore, daytime",course1_l3:"Jet skis included",course1_l4:"6 hours of training · no exam",
-    course2_tag:"Most complete",course2_sub:"Recreational Craft Skipper",course2_l1:"Boats up to 15 m",course2_l2:"Up to 12 miles from shore",course2_l3:"Night navigation",course2_l4:"Theory + practice + exam",
-    course3_tag:"A strong start",course3_sub:"Basic Navigation Skipper",course3_l1:"Boats up to 8 m",course3_l2:"Up to 5 miles from shore",course3_l3:"Natural step toward the PER",course3_l4:"Theory + practice + exam",
+    course1_tag:"Most popular",course1_h:"Navigation licence",course1_sub:'The old "titulín". The first step, no exam.',course1_l1:"Boats up to 6 m: motor and sail, plus jet skis",course1_l2:"Up to 2 miles from shore, daytime",course1_l3:"From age 16 · no exam",course1_l4:"4 h practice + 2 h theory",
+    course2_tag:"Most complete",course2_sub:"Recreational Craft Skipper",course2_l1:"Boats up to 15 m · up to 12 miles",course2_l2:"Night navigation and island-to-island (Balearics/Canaries)",course2_l3:"From age 18 · exam",course2_l4:"16 h practice + radio (short range)",
+    course3_tag:"A strong start",course3_sub:"Basic Navigation Skipper",course3_l1:"Boats up to 8 m",course3_l2:"Up to 5 miles from shore",course3_l3:"From age 16 · theory exam",course3_l4:"8 h practice + 4 h radio",
     course4_tag:"No limits",course4_h:"Yacht Skipper / Captain",course4_sub:"For long passages",course4_l1:"Boats up to 24 m",course4_l2:"Up to 60–150 miles from shore",course4_l3:"Offshore navigation",course4_l4:"Advanced training + exam",
-    course_total:"all included",course_est:"sample price",course_book:"Book",course_info:"Learn more",
-    courses_note:"* Demo: the licence price (€180) is real; PNB, PER and Yacht are sample prices, to be confirmed with the school.",
+    course5_tag:"Long passages",course5_h:"Yacht Skipper",course5_sub:"A step beyond the PER",course5_l1:"Boats up to 24 m",course5_l2:"Up to 150 miles from shore",course5_l3:"Requires the PER · exam",course5_l4:"48 h of practice",
+    course6_tag:"No limits",course6_h:"Yacht Captain",course6_sub:"The top recreational qualification",course6_l1:"Boats up to 24 m",course6_l2:"No distance-from-shore limit",course6_l3:"Requires the Yacht Skipper · exam",course6_l4:"48 h of practice",
+    course_total:"all included",course_est:"sample price",course_book:"Book",course_info:"Learn more",course_ask:"Ask us",
+    courses_extra:"We also offer: <b>Sail endorsement</b> (16 h), <b>Balearics endorsement</b> (up to 24 m) and <b>radio</b> courses (short and long range).",
+    courses_note:"* Demo: only the licence price (€180) is real. For the other qualifications, ask us for the price.",
+    charter_eyebrow:"Yacht charter",charter_h2:"Set sail along the Costa Brava",charter_sub:"Our yacht, with a skipper on board. You enjoy the sea; we take care of the rest.",
+    charter_chip:"11.70 m · up to 8 people",charter_boat_h:"Yacht «NORTH WIND 38»",
+    charter_s1:"11.70 m length overall",charter_s2:"Volvo Penta 50 HP engine",charter_s3:"Up to 8 people",charter_s4:"3 cabins",charter_s5:"Skipper included",charter_s6:"VHF, GPS plotter and AIS",charter_s7:"Autopilot",charter_s8:"Radio beacon (EPIRB)",
+    charter_cta:"Ask about availability",charter_note:"Trips along the Costa Brava. Price and dates: ask us on WhatsApp.",
+    dates_eyebrow:"Upcoming dates",dates_h2:"When we can start",dates_sub:"We run Navigation licence courses every month in Palamós. For the PNB and PER, we prepare you for the official exam dates throughout the year.",
+    dates_intro1:"These are example dates to show what the calendar would look like. We confirm the real dates right away on WhatsApp, based on availability.",
+    dates_intro2:"We pick the day that suits you best together: weekday, weekend or intensive in a single day.",
+    dates_cta:"Ask for the real dates",dates_example:"sample",dates_mon_jul:"Jul",dates_mon_sep:"Sep",
+    dates_r1_t:"Navigation licence",dates_r1_s:"Palamós · intensive in one day",
+    dates_r2_t:"Navigation licence",dates_r2_s:"Palamós · weekend",
+    dates_r3_t:"PNB — preparation",dates_r3_s:"Girona · toward the official exam",
+    dates_r4_t:"PER — preparation",dates_r4_s:"Girona · toward the official exam",
     about_photo:"Real photo of Sergi and students at Palamós harbour",about_chip:"reviews · 5.0★",about_eyebrow:"The school",about_h2:"A village school, with a real sea",
     about_p1:"For over 20 years we've been teaching people to sail on the Costa Brava. We're not a big, cold academy: we're Sergi and a small team who know every cove around here.",
     about_p2:"That's why our students rate us 5.0★ and recommend us by name. You really learn, you get out to sea right away, and you leave wanting more.",
@@ -1001,17 +1228,21 @@ const I18N = {
     faq3_q:"What can I skipper with the licence?",faq3_a:"Motorboats up to 6 metres and jet skis, within 2 miles of the coast and in daylight. If you want to go further, we'll prepare you for the PNB or PER.",
     faq4_q:"Where are you and in which languages is the course?",faq4_a:"We have schools in Palamós (at the harbour) and Girona. Same team, same phone. We teach in Catalan, Spanish, English and French.",
     faq5_q:"Do I need prior experience?",faq5_a:"None at all. Most students had never touched a helm. We start from scratch and head out to sea the same day.",
+    faq6_q:"Which qualification do I need for what I want to do?",faq6_a:"For a small boat or jet ski close to shore, the Licence. To go further or at night, the PER. If you're unsure, tell us what you want to do and we'll point you to the right qualification, without paying for more than you need.",
+    faq7_q:"What's the difference between PNB, PER and Yacht?",faq7_a:"The PNB goes to 8 m and 5 miles; the PER, to 15 m, 12 miles and at night, and lets you cross between islands. The Yacht Skipper goes up to 24 m and 150 miles, and the Yacht Captain removes the distance limit. Each one requires the previous.",
+    faq8_q:"Do you do sailing practice?",faq8_a:"Yes. We have the Sail endorsement (16 h) to add sailing to your qualification, and we do the practice on our yacht, actually sailing along the Costa Brava.",
+    faq9_q:"Do you rent boats or run trips with a skipper?",faq9_a:"Yes. We have the yacht «NORTH WIND 38» (11.70 m, up to 8 people) with a skipper on board for trips along the Costa Brava. Message us on WhatsApp and we'll tell you availability and price.",
     contact_eyebrow:"Contact",contact_h2:"Shall we talk? Takes a minute",loc_open:"At the harbour · Mon to Sat",loc_open2:"In the centre · Mon to Fri",
     wa_box_h:"The fastest way",wa_box_p:"On the Costa Brava everyone uses WhatsApp. Message us and we'll reply right away, like a person.",wa_box_btn:"Open WhatsApp",
     form_h:"Or leave us your details",form_p:"We'll call or message you. No commitment.",form_name:"Name",form_phone:"Phone",form_course:"Which course interests you?",
-    form_opt1:"Navigation licence (€180)",form_opt2:"Yacht Skipper / Captain",form_opt3:"Not sure yet",form_msg:"Message (optional)",form_send:"Send",
+    form_opt1:"Navigation licence (€180)",form_opt2:"Yacht Skipper / Captain",form_opt4:"Yacht charter",form_opt3:"Not sure yet",form_msg:"Message (optional)",form_send:"Send",
     form_ok_h:"Got it!",form_ok_p:"We'll be in touch very soon. (Demo: this form doesn't actually send anything.)",
     final_h:'Spend this summer <em>at sea</em>.',final_p:"One qualification, one day, and the whole Costa Brava ahead of you. Start with a message.",final_cta:"Start on WhatsApp",
     foot_p:"Sailing school accredited by the Generalitat de Catalunya. Over 20 years teaching people to sail on the Costa Brava.",
     foot_courses:"Courses",foot_school:"The school",foot_contact_t:"Contact",foot_rights:"All rights reserved",foot_demo:"Design demo made for the Rumbo project · no data is sent or stored"
   },
   fr:{
-    brand_sub:"Palamós · Girona",nav_courses:"Cours",nav_about:"L'école",nav_reviews:"Avis",nav_faq:"Questions",nav_contact:"Contact",nav_wa:"WhatsApp",
+    brand_sub:"Palamós · Girona",nav_courses:"Cours",nav_charter:"Location",nav_dates:"Dates",nav_about:"L'école",nav_reviews:"Avis",nav_faq:"Questions",nav_contact:"Contact",nav_wa:"WhatsApp",
     hero_eyebrow:"Costa Brava · depuis 2005",
     hero_h1:'Naviguez cet <span class="em"><b>été</b></span>.<br>Le permis, en un jour.',
     hero_lead:"Passez votre permis de navigation avec Sergi à Palamós ou Girona : 6 heures, sans examen, et vous pouvez prendre la mer. Simple, proche et homologué par la Generalitat.",
@@ -1019,12 +1250,27 @@ const I18N = {
     scene_note:"Ici, une vraie photo de l'école",
     float_quote:'"Sergi explique tout avec beaucoup de patience. On naviguait le jour même."',float_who:"Marc R. · Avis Google",float_badge:"ans en mer",
     courses_eyebrow:"Diplômes",courses_h2:"Choisissez votre diplôme",courses_sub:"De la première sortie en mer jusqu'au yacht. On vous dit clairement ce que vous pouvez piloter, la durée et le prix — sans avoir à appeler pour connaître le tarif.",
-    course1_tag:"Le plus populaire",course1_h:"Permis de navigation",course1_sub:"La première étape. Sans examen.",course1_l1:"Bateaux à moteur jusqu'à 6 m",course1_l2:"Jusqu'à 2 milles de la côte, de jour",course1_l3:"Jet-skis inclus",course1_l4:"6 heures de formation · sans examen",
-    course2_tag:"Le plus complet",course2_sub:"Patron de bateau de plaisance",course2_l1:"Bateaux jusqu'à 15 m",course2_l2:"Jusqu'à 12 milles de la côte",course2_l3:"Navigation de nuit",course2_l4:"Théorie + pratique + examen",
-    course3_tag:"Pour bien démarrer",course3_sub:"Patron de navigation de base",course3_l1:"Bateaux jusqu'à 8 m",course3_l2:"Jusqu'à 5 milles de la côte",course3_l3:"Étape naturelle vers le PER",course3_l4:"Théorie + pratique + examen",
+    course1_tag:"Le plus populaire",course1_h:"Permis de navigation",course1_sub:'L\'ancien « titulín ». La première étape, sans examen.',course1_l1:"Bateaux jusqu'à 6 m : moteur et voile, et jet-skis",course1_l2:"Jusqu'à 2 milles de la côte, de jour",course1_l3:"Dès 16 ans · sans examen",course1_l4:"4 h de pratique + 2 h de théorie",
+    course2_tag:"Le plus complet",course2_sub:"Patron de bateau de plaisance",course2_l1:"Bateaux jusqu'à 15 m · jusqu'à 12 milles",course2_l2:"Navigation de nuit et entre îles (Baléares/Canaries)",course2_l3:"Dès 18 ans · examen",course2_l4:"16 h de pratique + radio (courte portée)",
+    course3_tag:"Pour bien démarrer",course3_sub:"Patron de navigation de base",course3_l1:"Bateaux jusqu'à 8 m",course3_l2:"Jusqu'à 5 milles de la côte",course3_l3:"Dès 16 ans · examen théorique",course3_l4:"8 h de pratique + 4 h de radio",
     course4_tag:"Sans limites",course4_h:"Patron / Capitaine de Yacht",course4_sub:"Pour les grandes traversées",course4_l1:"Bateaux jusqu'à 24 m",course4_l2:"Jusqu'à 60–150 milles de la côte",course4_l3:"Navigation hauturière",course4_l4:"Formation avancée + examen",
-    course_total:"tout compris",course_est:"prix indicatif",course_book:"Réserver",course_info:"En savoir plus",
-    courses_note:"* Démo : le prix du permis (180 €) est réel ; PNB, PER et Yacht sont des prix indicatifs, à confirmer avec l'école.",
+    course5_tag:"Longues traversées",course5_h:"Patron de Yacht",course5_sub:"Un pas au-delà du PER",course5_l1:"Bateaux jusqu'à 24 m",course5_l2:"Jusqu'à 150 milles de la côte",course5_l3:"Nécessite le PER · examen",course5_l4:"48 h de pratique",
+    course6_tag:"Sans limites",course6_h:"Capitaine de Yacht",course6_sub:"Le diplôme de plaisance le plus élevé",course6_l1:"Bateaux jusqu'à 24 m",course6_l2:"Sans limite de distance à la côte",course6_l3:"Nécessite le Patron de Yacht · examen",course6_l4:"48 h de pratique",
+    course_total:"tout compris",course_est:"prix indicatif",course_book:"Réserver",course_info:"En savoir plus",course_ask:"Demande-nous",
+    courses_extra:"Nous proposons aussi : <b>habilitation Voile</b> (16 h), <b>habilitation Baléares</b> (jusqu'à 24 m) et des cours de <b>radio</b> (courte et longue portée).",
+    courses_note:"* Démo : seul le prix du permis (180 €) est réel. Pour les autres diplômes, demande-nous le prix.",
+    charter_eyebrow:"Location de voilier",charter_h2:"Partez naviguer sur la Costa Brava",charter_sub:"Notre voilier, avec un skipper à bord. Vous profitez de la mer ; nous nous occupons du reste.",
+    charter_chip:"11,70 m · jusqu'à 8 personnes",charter_boat_h:"Voilier « NORTH WIND 38 »",
+    charter_s1:"11,70 m de longueur",charter_s2:"Moteur Volvo Penta 50 CV",charter_s3:"Jusqu'à 8 personnes",charter_s4:"3 cabines",charter_s5:"Skipper inclus",charter_s6:"VHF, GPS-traceur et AIS",charter_s7:"Pilote automatique",charter_s8:"Radiobalise (EPIRB)",
+    charter_cta:"Demander la disponibilité",charter_note:"Sorties sur la Costa Brava. Prix et dates : demande-nous sur WhatsApp.",
+    dates_eyebrow:"Prochaines dates",dates_h2:"Quand on peut commencer",dates_sub:"Nous organisons des cours de Permis de navigation chaque mois à Palamós. Pour le PNB et le PER, nous vous préparons aux dates d'examen officiel tout au long de l'année.",
+    dates_intro1:"Ce sont des dates d'exemple pour montrer à quoi ressemblerait le calendrier. Les vraies dates, on vous les confirme aussitôt sur WhatsApp selon les disponibilités.",
+    dates_intro2:"On choisit ensemble le jour qui vous convient le mieux : en semaine, le week-end ou en intensif sur une seule journée.",
+    dates_cta:"Demander les vraies dates",dates_example:"exemple",dates_mon_jul:"Juil",dates_mon_sep:"Sept",
+    dates_r1_t:"Permis de navigation",dates_r1_s:"Palamós · intensif sur une journée",
+    dates_r2_t:"Permis de navigation",dates_r2_s:"Palamós · week-end",
+    dates_r3_t:"PNB — préparation",dates_r3_s:"Girona · vers l'examen officiel",
+    dates_r4_t:"PER — préparation",dates_r4_s:"Girona · vers l'examen officiel",
     about_photo:"Vraie photo de Sergi et des élèves au port de Palamós",about_chip:"avis · 5,0★",about_eyebrow:"L'école",about_h2:"Une école de village, avec la vraie mer",
     about_p1:"Depuis plus de 20 ans, nous apprenons à naviguer sur la Costa Brava. Nous ne sommes pas une grande académie froide : nous sommes Sergi et une petite équipe qui connaît chaque crique d'ici.",
     about_p2:"C'est pour ça que nos élèves nous notent 5,0★ et nous recommandent par notre nom. Vous apprenez vraiment, vous prenez la mer tout de suite et vous repartez avec l'envie d'y retourner.",
@@ -1045,10 +1291,14 @@ const I18N = {
     faq3_q:"Que puis-je piloter avec le permis ?",faq3_a:"Bateaux à moteur jusqu'à 6 mètres et jet-skis, à moins de 2 milles de la côte et de jour. Pour aller plus loin, on vous prépare au PNB ou au PER.",
     faq4_q:"Où êtes-vous et dans quelles langues se fait le cours ?",faq4_a:"Nous avons une école à Palamós (au port) et à Girona. Même équipe, même téléphone. Nous formons en catalan, espagnol, anglais et français.",
     faq5_q:"Faut-il de l'expérience ?",faq5_a:"Aucune. La plupart des élèves n'avaient jamais touché une barre. On part de zéro et on prend la mer le jour même.",
+    faq6_q:"Quel diplôme me faut-il selon ce que je veux faire ?",faq6_a:"Pour un petit bateau ou un jet-ski près de la côte, le Permis. Pour aller plus loin ou de nuit, le PER. En cas de doute, dites-nous ce que vous voulez faire et on vous indique le diplôme adapté, sans payer plus que nécessaire.",
+    faq7_q:"Quelle différence entre PNB, PER et Yacht ?",faq7_a:"Le PNB va jusqu'à 8 m et 5 milles ; le PER, jusqu'à 15 m, 12 milles et de nuit, et permet de naviguer entre îles. Le Patron de Yacht monte à 24 m et 150 milles, et le Capitaine de Yacht supprime la limite de distance. Chacun nécessite le précédent.",
+    faq8_q:"Faites-vous des pratiques de voile ?",faq8_a:"Oui. Nous avons l'habilitation Voile (16 h) pour ajouter la voile à votre diplôme, et nous faisons les pratiques sur notre voilier, en naviguant pour de vrai sur la Costa Brava.",
+    faq9_q:"Louez-vous des bateaux ou faites-vous des sorties avec skipper ?",faq9_a:"Oui. Nous disposons du voilier « NORTH WIND 38 » (11,70 m, jusqu'à 8 personnes) avec skipper à bord pour des sorties sur la Costa Brava. Écrivez-nous sur WhatsApp et on vous indique disponibilité et prix.",
     contact_eyebrow:"Contact",contact_h2:"On en parle ? Ça prend une minute",loc_open:"Au port · Lundi au samedi",loc_open2:"Au centre · Lundi au vendredi",
     wa_box_h:"Le plus rapide",wa_box_p:"Sur la Costa Brava, tout le monde passe par WhatsApp. Écrivez-nous, on répond tout de suite, comme une personne.",wa_box_btn:"Ouvrir WhatsApp",
     form_h:"Ou laissez-nous vos coordonnées",form_p:"On vous appelle ou on vous écrit. Sans engagement.",form_name:"Nom",form_phone:"Téléphone",form_course:"Quel cours vous intéresse ?",
-    form_opt1:"Permis de navigation (180 €)",form_opt2:"Patron / Capitaine de Yacht",form_opt3:"Je ne sais pas encore",form_msg:"Message (facultatif)",form_send:"Envoyer",
+    form_opt1:"Permis de navigation (180 €)",form_opt2:"Patron / Capitaine de Yacht",form_opt4:"Location de voilier",form_opt3:"Je ne sais pas encore",form_msg:"Message (facultatif)",form_send:"Envoyer",
     form_ok_h:"Bien reçu !",form_ok_p:"On vous contacte très vite. (Démo : ce formulaire n'envoie rien pour de vrai.)",
     final_h:'Passez cet été <em>en mer</em>.',final_p:"Un diplôme, une journée, et toute la Costa Brava devant vous. Commencez par un message.",final_cta:"Commencez sur WhatsApp",
     foot_p:"École nautique homologuée par la Generalitat de Catalunya. Plus de 20 ans à apprendre à naviguer sur la Costa Brava.",
